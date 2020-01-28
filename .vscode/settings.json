@@ -1,0 +1,43 @@
+{
+  // User defined settings for debugging and stuff.
+  "app.port": 8080,
+
+  "prettier.configPath": "./frontend/.prettierrc",
+  "prettier.vueIndentScriptAndStyle": true,
+  
+  "eslint.workingDirectories": [
+    "./frontend",
+    "./backend",
+  ],
+  "eslint.options": { "configFile": "../frontend/.eslintrc.js" },
+
+  // "debug.onTaskErrors": "debugAnyway",
+
+  
+  // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    // "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnSave": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    // "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnSave": true
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    // "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnSave": true
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  // Set the default
+  // "editor.formatOnSave": false,
+}
