@@ -1,7 +1,6 @@
 # CSCI3230U - Final Project
 
-Group project Members: Nathan Beals, Dan Bollock, Sinthooran Ravinathan & Alexander Waddell
-
+Group project Members: Nathan Beals, Daniel Bullock, Sinthooran Ravinathan & Alexander Waddell
 
 
 ## Project setup
