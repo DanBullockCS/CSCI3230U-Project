@@ -133,3 +133,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+backend/dev.db
