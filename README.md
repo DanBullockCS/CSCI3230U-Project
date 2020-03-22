@@ -20,7 +20,7 @@ npm install
 
 #### Compiles and hot-reloads for development
 
-* this will proxy api requests (all requests sent to the `/api` route to `localhost:8081`)
+* this will proxy api requests (all requests sent to the `/api` route to `localhost:8080`)
 
 ```bash
 npm run serve
