@@ -1,6 +1,13 @@
 <template>
   <div class="settings">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Settings" />
+    <p>fFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</p>
+    <p></p>
   </div>
 </template>
+
+<script>
+export default {
+  name: "Settings"
+};
+</script>

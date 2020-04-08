@@ -1,6 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Settings from "../views/Settings.vue";
+import Trash from "../views/Trash.vue";
+import Analytics from "../views/Analytics.vue";
 
 Vue.use(VueRouter);
 
@@ -12,19 +15,24 @@ const routes = [
   },
   {
     path: "/settings",
-    name: "settings",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Settings.vue")
+    name: "Settings",
+    component: Settings
+  },
+  {
+    path: "/Trash",
+    name: "Trash",
+    component: Trash
+  },
+  {
+    path: "/Analytics",
+    name: "Analytics",
+    component: Analytics
   }
 ];
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes
+  routes,
+  mode: "history"
 });
 
 export default router;
