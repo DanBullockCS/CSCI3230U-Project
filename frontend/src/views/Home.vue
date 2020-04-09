@@ -6,6 +6,4 @@
 export default {
   name: "home"
 };
-
-console.log("home");
 </script>
