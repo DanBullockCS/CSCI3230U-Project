@@ -73,9 +73,9 @@
       <v-toolbar-title>Notifier</v-toolbar-title>
     </v-app-bar>
 
-    <v-footer color="gray" app>
+    <!-- <v-footer color="gray" app>
       <span class="white--text">Notifier &copy; 2020</span>
-    </v-footer>
+    </v-footer>-->
   </v-app>
 </template>
 
