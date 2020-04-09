@@ -1,7 +1,5 @@
 <template>
-  <div class="analytics">
-    <img alt="Vue logo" src="../assets/logo.png" />
-  </div>
+  <div class="analytics">Analytics</div>
 </template>
 
 <script>

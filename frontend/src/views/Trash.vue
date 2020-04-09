@@ -1,7 +1,5 @@
 <template>
-  <div class="trash">
-    <img alt="Vue logo" src="../assets/logo.png" />
-  </div>
+  <div class="trash">Trash</div>
 </template>
 
 <script>
