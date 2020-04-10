@@ -1,5 +1,7 @@
 <template>
-  <div class="trash">Trash</div>
+  <div class="trash">
+    <h3>Trash</h3>
+  </div>
 </template>
 
 <script>

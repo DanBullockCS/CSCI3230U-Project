@@ -6,6 +6,7 @@
           <Drawer />
           <template v-slot:append>
             <div class="pa-2">
+              <v-btn class="mb-2 primary" href="Login" block>Login</v-btn>
               <v-btn block>Logout</v-btn>
             </div>
           </template>

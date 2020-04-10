@@ -1,5 +1,7 @@
 <template>
-  <div class="analytics">Analytics</div>
+  <div class="analytics">
+    <h3>Analytics</h3>
+  </div>
 </template>
 
 <script>
