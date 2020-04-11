@@ -6,7 +6,9 @@
           <Drawer />
           <template v-slot:append>
             <div class="pa-2">
+              <v-switch v-model="darkmode" label="Dark Mode"></v-switch>
               <v-btn class="mb-2 primary" href="Login" block>Login</v-btn>
+              <v-btn class="mb-2 primary" href="SignUp" block>Sign Up</v-btn>
               <v-btn block>Logout</v-btn>
             </div>
           </template>
@@ -18,13 +20,13 @@
         </v-container>
       </v-content>
 
-      <v-app-bar app color="gray" dark>
+      <v-app-bar app color="gray">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
         <v-toolbar-title>Notifier</v-toolbar-title>
       </v-app-bar>
 
       <v-footer color="gray" app>
-        <span class="white--text">Notifier &copy; 2020</span>
+        <span>Notifier &copy; 2020</span>
       </v-footer>
     </v-app>
   </div>
@@ -40,11 +42,14 @@ export default {
     source: String
   },
   data: () => ({
-    drawer: null
+    drawer: null,
+    darkmode: false
   }),
 
-  created() {
-    this.$vuetify.theme.dark = true;
+  watch: {
+    darkmode(newValue) {
+      this.$vuetify.theme.dark = newValue;
+    }
   }
 };
 </script>

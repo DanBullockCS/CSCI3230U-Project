@@ -8,13 +8,13 @@
       </v-col>
 
       <div class="mx-5">
-        <v-btn large color="primary" href="/">Go Back</v-btn>
-        <v-btn class="ml-12" large color="primary" href="/">Login</v-btn>
+        <v-btn large color="primary" href="/">Login</v-btn>
       </div>
     </div>
 
-    <h2 class="mt-12">Havent made an Account yet?</h2>
-    <div class="mx-5 my-2">
+    <h3 class="mt-12">Haven't made an Account yet?</h3>
+    <div class="mx-5">
+      <br />
       <v-btn large color="purple" href="/SignUp">Sign Up</v-btn>
     </div>
   </div>

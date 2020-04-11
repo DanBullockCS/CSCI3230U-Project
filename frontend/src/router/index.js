@@ -24,7 +24,7 @@ const routes = [
   {
     path: "/Settings",
     name: "Settings",
-    component: Settings
+    component: Settings,
   },
   {
     path: "/Trash",

@@ -5,7 +5,7 @@
     <v-col cols="2" sm="6">
       <div class="mx-5">
         <v-text-field v-model="username" label="Old Username" outlined shaped></v-text-field>
-        <v-text-field v-model="username2" label="New Username" outlined shaped></v-text-field>
+        <v-text-field v-model="newUsername" label="New Username" outlined shaped></v-text-field>
         <v-btn class="mx-5" large color="primary" href="/Account">Change</v-btn>
       </div>
     </v-col>
@@ -21,8 +21,16 @@
           clearable
         ></v-text-field>
         <v-text-field
-          v-model="password2"
+          v-model="newPassword"
           label="New Password"
+          type="password"
+          outlined
+          shaped
+          clearable
+        ></v-text-field>
+        <v-text-field
+          v-model="confirmNewPassword"
+          label="Confirm New Password"
           type="password"
           outlined
           shaped
@@ -35,7 +43,7 @@
     <v-col cols="2" sm="6">
       <div class="mx-5">
         <v-text-field v-model="email" label="Old Email" type="email" outlined shaped clearable></v-text-field>
-        <v-text-field v-model="email2" label="New Email" type="email" outlined shaped clearable></v-text-field>
+        <v-text-field v-model="newEmail" label="New Email" type="email" outlined shaped clearable></v-text-field>
         <v-btn class="mx-5" large color="primary" href="/Account">Change</v-btn>
       </div>
     </v-col>
@@ -44,6 +52,17 @@
 
 <script>
 export default {
-  name: "Account"
+  name: "Account",
+  data() {
+    return {
+      username: "",
+      newUsername: "",
+      password: "",
+      newPassword: "",
+      confirmNewPassword: "",
+      email: "",
+      newEmail: ""
+    };
+  }
 };
 </script>
