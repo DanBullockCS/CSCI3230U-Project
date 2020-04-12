@@ -12,11 +12,35 @@
     "configurations": [
         {
             "type": "node",
+            "request": "attach",
+            "name": "Attach",
+            "port": 9229,
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Backend: launch this file",
+            "cwd": "${workspaceFolder}/backend",
+            "program": "${file}",
+            "runtimeExecutable": "${workspaceFolder}/backend/node_modules/.bin/babel-node",
+            // "runtimeArgs": ["--inspect"],
+            "restart": false,
+            "console": "internalConsole",
+            "internalConsoleOptions": "openOnFirstSessionStart",
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "type": "node",
             "request": "launch",
             "name": "Backend: launch nodemon",
             "cwd": "${workspaceFolder}/backend",
             "runtimeExecutable": "${workspaceFolder}/backend/node_modules/.bin/nodemon",
-            "runtimeArgs": ["--inspect"],
+            "runtimeArgs": ["--inspect", "--exec","babel-node"],
             "program": "${workspaceFolder}/backend/main.js",
             "restart": true,
             "console": "internalConsole",
