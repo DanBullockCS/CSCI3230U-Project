@@ -1,20 +1,17 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('NotificationData', {
+    return queryInterface.createTable('NotifierGroups', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      creator: {
-        type: Sequelize.INTEGER
+      displayName: {
+        type: Sequelize.STRING
       },
-      data: {
-        type: Sequelize.JSON
-      },
-      sender: {
+      extraData: {
         type: Sequelize.JSON
       },
       createdAt: {
@@ -28,6 +25,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('NotificationData');
+    return queryInterface.dropTable('NotifierGroups', {cascade: true});
   }
 };

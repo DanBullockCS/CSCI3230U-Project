@@ -1,11 +1,26 @@
 
 export default {
+    Query: {
+        User: (parent, { id }, { db }, info) => db.User.findByPk(id),
+        Users: (parent, args, { db }, info) => db.User.findAll(),
+        
+        Notifier: (parent, { id }, { db }, info) => db.Notifier.findByPk(id),
+        Notifiers: (parent, args, { db }, info) => db.Notifier.findAll(),
+        
+        NotifierGroup: (parent, { id }, { db }, info) => db.NotifierGroup.findByPk(id),
+        NotifierGroups: (parent, args, { db }, info) => db.NotifierGroup.findAll(),
+        
+    },
     User: {
     },
-    Query: {
-        user: (parent, { id }, { db }, info) => db.User.findByPk(id),
-        users: (parent, args, { db }, info) => db.User.findAll(),
+    
+    Notifier: {
+       Group: async (parent, args, { db }, info) => db.NotifierGroup.findByPk( parent.notifierGroupID ),
+       
     },
+    NotifierGroup: {
+        Notifiers: async (parent, args, { db }, info) => db.Notifier.findAll( { where: { notifierGroupID: parent.id } } ),
+    }
     // Author: {
     //     posts: (parent, args, context, info) => parent.getPosts(),
     // },

@@ -9,7 +9,8 @@
     "build-web": "webpack --entry ./app/public/js/index.js --output-filename bundle.min.js --output-path ./app/public/js ",
     "build": "babel main.js -d dist",
     "sequelize-skeleton": "npx sequelize init:models; npx sequelize init:config",
-    "init-db": "npx sequelize db:migrate:undo:all && npx sequelize db:migrate",
+    "init-db": "npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize-cli db:seed:all",
+    "reset-db": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize-cli db:seed:all",
     "migrate": "npx sequelize db:migrate"
   },
   "nodemonConfigg": {

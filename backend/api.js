@@ -37,8 +37,11 @@ export default async function initializeAPI(app) {
 
 
 
-  app.get("/api", (req, res) => {
-    res.json({ the: "Hello World!!!!fs!" });
+  app.get("/api", async (req, res) => {
+    // res.json({ the: "Hello World!!!!fs!" });
+    let results = await db.User.findAll();
+    console.log("RES: ",typeof results[0].id );
+    res.json(results)
   });
 
 

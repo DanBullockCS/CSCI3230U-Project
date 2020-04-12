@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       primaryKey: true,
       autoIncrement: true,
-      type: DataTypes.BIGINT,
+      type: DataTypes.INTEGER,
     },
   }, {});
   Profile.associate = function (models) {

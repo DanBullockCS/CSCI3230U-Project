@@ -2,8 +2,12 @@
 
 module.exports = (sequelize, DataTypes) => {
   const NotificationData = sequelize.define('NotificationData', {
-    id: DataTypes.BIGINT,
-    creator: DataTypes.BIGINT,
+    id: {
+      primaryKey: true,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+    },
+    creator: DataTypes.INTEGER,
     data: DataTypes.JSON,
     sender: DataTypes.JSON
   }, {});
