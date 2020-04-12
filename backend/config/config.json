@@ -1,5 +1,13 @@
 {
   "development": {
+    "dialect": "postgres",
+    "username": "postgres",
+    "password": "development",
+    "database": "webdev",
+    "host": "127.0.0.1",
+    "operatorsAliases": false
+  },
+  "development_": {
     "dialect": "sqlite",
     "storage": "./dev.db",
     "username": "root",
@@ -25,5 +33,3 @@
     "operatorsAliases": false
   }
 }
-
-

@@ -4,15 +4,15 @@ module.exports = (sequelize, DataTypes) => {
     "User",
     {
       id: {
+        primaryKey: true,
+        autoIncrement: true,
         type: DataTypes.BIGINT,
-        primary: true,
-        autoIncrement: true
       },
       profileId: DataTypes.BIGINT
     },
     {}
   );
-  User.associate = function(models) {
+  User.associate = function (models) {
     // associations can be defined here
   };
   return User;
