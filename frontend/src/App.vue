@@ -7,8 +7,8 @@
           <template v-slot:append>
             <div class="pa-2">
               <v-switch v-model="darkmode" label="Dark Mode"></v-switch>
-              <v-btn class="mb-2 primary" href="Login" block>Login</v-btn>
-              <v-btn class="mb-2 primary" href="SignUp" block>Sign Up</v-btn>
+              <v-btn class="mb-2 primary" to="Login" block>Login</v-btn>
+              <v-btn class="mb-2 primary" to="SignUp" block>Sign Up</v-btn>
               <v-btn block>Logout</v-btn>
             </div>
           </template>
@@ -45,7 +45,6 @@ export default {
     drawer: null,
     darkmode: false
   }),
-
   watch: {
     darkmode(newValue) {
       this.$vuetify.theme.dark = newValue;

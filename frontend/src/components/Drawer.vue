@@ -1,6 +1,6 @@
 <template>
   <v-list dense rounded>
-    <v-list-item link href="/">
+    <v-list-item link to="/">
       <v-list-item-action>
         <v-icon>mdi-home</v-icon>
       </v-list-item-action>
@@ -9,7 +9,7 @@
       </v-list-item-content>
     </v-list-item>
     <v-divider></v-divider>
-    <v-list-item link href="/Account">
+    <v-list-item link to="/Account">
       <v-list-item-action>
         <v-icon>mdi-account</v-icon>
       </v-list-item-action>
@@ -17,7 +17,7 @@
         <v-list-item-title>Account</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-    <v-list-item link href="/Settings">
+    <v-list-item link to="/Settings">
       <v-list-item-action>
         <v-icon>mdi-settings</v-icon>
       </v-list-item-action>
@@ -25,7 +25,7 @@
         <v-list-item-title>Settings</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-    <v-list-item link href="/Trash">
+    <v-list-item link to="/Trash">
       <v-list-item-action>
         <v-icon>mdi-trash-can</v-icon>
       </v-list-item-action>
@@ -33,7 +33,7 @@
         <v-list-item-title>Trash</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-    <v-list-item link href="/Analytics">
+    <v-list-item link to="/Analytics">
       <v-list-item-action>
         <v-icon>mdi-chart-line</v-icon>
       </v-list-item-action>
