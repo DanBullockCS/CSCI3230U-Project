@@ -4,7 +4,7 @@ module.exports = {
       "/api": {
         target: "http://127.0.0.1:8081",
         changeOrigin: true,
-        ws: true
+        ws: true // websocket proxy 
       }
     }
   },
@@ -13,3 +13,13 @@ module.exports = {
   },
   transpileDependencies: ["vuetify"]
 };
+
+// const path = require("path");
+// chainWebpack: config => {
+//   config
+//     .entry("app")
+//     .clear()
+//     .add("./src/main.js")
+//     .end();
+//   config.resolve.alias.set("@", path.join(__dirname, "./src"));
+// },

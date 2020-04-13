@@ -26,15 +26,18 @@ module.exports = {
     //   include: [ db.NotifierGroup.Notifiers
     //   ]
     // });
-    await db.NotifierGroup.create({
-      displayName: "Test Group 1",
-      Notifiers: [ {token: '00000000-0000-0000-0000-000000000001', extraData: { hi: 'tst' } } ]
-    },
-    {
-      include: [ db.Notifier ]
-    });
 
-    return db.User.create({
+    // await queryInterface.bulkInsert('Users', [{
+    //   profileId: 1,
+    //   createdAt: new Date(),
+    //   updatedAt: new Date()
+    // }]);
+
+    // let res = await db.User.findByPk(1);
+    // console.log("user pk: ",res);
+    // await res.destroy();
+
+    await db.User.create({
       profileId: 1,
       UserGroups: [ {displayName: "Test User Group 1"} ]
     }, {
@@ -42,6 +45,28 @@ module.exports = {
         db.UserGroup
       ]
     });
+
+
+    await db.NotifierGroup.create({
+      displayName: "Test Group 1",
+      ownerID: 1,
+      Notifiers: [ {
+        token: '123',
+        extraData: { hi: 'test' },
+        NotificationData: [ { data: {title:'Hello', body: "World"} } ]
+      } ]
+    },
+    {
+      include: [ 
+        {
+          // association: db.NotifierGroup.Notifiers,
+          model: db.Notifier,
+          include: [db.NotificationData]
+        }
+        ]
+    });
+
+    return db.sequelize.sync();
     
     // return Promise.all([
     //   queryInterface.bulkInsert('Users', [{

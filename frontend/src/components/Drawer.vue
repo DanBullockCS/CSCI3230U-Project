@@ -9,7 +9,7 @@
       </v-list-item-content>
     </v-list-item>
     <v-divider></v-divider>
-    <v-list-item link href="/Account">
+    <v-list-item to="/Account">
       <v-list-item-action>
         <v-icon>mdi-account</v-icon>
       </v-list-item-action>
@@ -17,7 +17,7 @@
         <v-list-item-title>Account</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-    <v-list-item link href="/Settings">
+    <v-list-item to=/Settings link>
       <v-list-item-action>
         <v-icon>mdi-settings</v-icon>
       </v-list-item-action>

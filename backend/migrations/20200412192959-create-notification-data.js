@@ -8,11 +8,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      creator: {
-        type: Sequelize.INTEGER
+      notifierID: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Notifiers',
+          key: 'id'
+        }
       },
       data: {
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        allowNull: false,
       },
       sender: {
         type: Sequelize.JSON
@@ -23,6 +29,9 @@ module.exports = {
       },
       updatedAt: {
         allowNull: false,
+        type: Sequelize.DATE
+      },
+      deletedAt: {
         type: Sequelize.DATE
       }
     });

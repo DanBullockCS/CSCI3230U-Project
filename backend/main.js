@@ -1,25 +1,28 @@
+// import { ApolloServer, gql } from "apollo-server-express";
+// import faker from "faker";
+// import times from "lodash.times";
+// import random from "lodash.random";
+
+
+// import typeDefs from "./api/schema";
+// import resolvers from "./api/resolvers";
+
 import express from "express";
-import { ApolloServer, gql } from "apollo-server-express";
-import faker from "faker";
-import times from "lodash.times";
-import random from "lodash.random";
-
-
-import typeDefs from "./schema";
-import resolvers from "./resolvers";
 import db from "./models";
 
-import initializeAPI from "./api";
+// import initializeAPI from "./api/api";
 import { config, logger } from "./config";
+
+import initializeAPI from "./api";
 
 async function main() {
   logger.info(
     `Begun initialization of ${config.name} backend & frontend.\n\tPort: ${config.port}`
   );
 
-  const app = await initializeApp(); // sets up express app and middleware
+  const app = await initializeApp(config, logger); // sets up express app and middleware
 
-  const graphqlServer = await initializeAPI(app);
+  const graphqlServer = await initializeAPI(app, config, logger);
   
   app.listen({ port: config.port }, () =>
     console.log(

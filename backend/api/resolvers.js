@@ -12,7 +12,7 @@ export default {
         
     },
     User: {
-    },
+    },  
     
     Notifier: {
        Group: async (parent, args, { db }, info) => db.NotifierGroup.findByPk( parent.notifierGroupID ),
@@ -21,6 +21,8 @@ export default {
     NotifierGroup: {
         Notifiers: async (parent, args, { db }, info) => db.Notifier.findAll( { where: { notifierGroupID: parent.id } } ),
     }
+
+    
     // Author: {
     //     posts: (parent, args, context, info) => parent.getPosts(),
     // },

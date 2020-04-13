@@ -7,12 +7,25 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       type: DataTypes.INTEGER,
     },
-    creator: DataTypes.INTEGER,
-    data: DataTypes.JSON,
+    notifierID: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Notifier',
+        key: 'id'
+      }
+    },
+    data: {
+      type: DataTypes.JSON,
+      allowNull: false,
+    },
     sender: DataTypes.JSON
-  }, {});
+  }, {
+    paranoid: true,
+  });
   NotificationData.associate = function(models) {
     // associations can be defined here
+    NotificationData.Notifier = NotificationData.belongsTo( models.Notifier , { foreignKey: 'notifierID' } );
   };
   return NotificationData;
 };

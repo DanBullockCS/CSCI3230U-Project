@@ -24,7 +24,8 @@ const routes = [
   {
     path: "/Settings",
     name: "Settings",
-    component: Settings,
+    // component: Settings,
+    component: () => import(/* webpackChunkName: "about" */ "../views/Settings.vue")
   },
   {
     path: "/Trash",
@@ -49,8 +50,9 @@ const routes = [
 ];
 
 const router = new VueRouter({
+  mode: "history",
+  base: process.env.BASE_URL,
   routes,
-  mode: "history"
 });
 
 export default router;

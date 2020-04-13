@@ -8,6 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      ownerID: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'UserGroups',
+          key: 'id'
+        }
+      },
       displayName: {
         type: Sequelize.STRING
       },
@@ -20,6 +28,9 @@ module.exports = {
       },
       updatedAt: {
         allowNull: false,
+        type: Sequelize.DATE
+      },
+      deletedAt: {
         type: Sequelize.DATE
       }
     });

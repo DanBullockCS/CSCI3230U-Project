@@ -16,8 +16,9 @@ module.exports = {
         }
       },
       token: {
-        type: Sequelize.UUID,
-        defaultValue: '00000000-0000-0000-0000-000000000000',
+        type: Sequelize.STRING,
+        defaultValue: '',
+        unique: true,
         allowNull: false,
       },
       extraData: {
@@ -29,6 +30,9 @@ module.exports = {
       },
       updatedAt: {
         allowNull: false,
+        type: Sequelize.DATE
+      },
+      deletedAt: {
         type: Sequelize.DATE
       }
     });

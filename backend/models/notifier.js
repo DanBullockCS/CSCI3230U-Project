@@ -15,16 +15,26 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     token: {
-      type: DataTypes.UUID,
-      defaultValue: '00000000-0000-0000-0000-000000000000',
+      type: DataTypes.STRING,
+      defaultValue: '',
+      unique: true,
       allowNull: false,
     },
     extraData: DataTypes.JSON
-  }, {});
+  }, {
+    paranoid: true,
+  });
   Notifier.associate = function(models) {
     // associations can be defined here
     // Notifier.hasOne( models.NotifierGroup )
-    Notifier.Group = Notifier.belongsTo( models.NotifierGroup, {foreignKey: 'notifierGroupID' } )
+    Notifier.Group = Notifier.belongsTo( models.NotifierGroup, {
+      foreignKey: 'notifierGroupID',
+      scope: {
+        status: 'open'
+      }
+    } )
+
+    Notifier.Data = Notifier.hasMany( models.NotificationData, { foreignKey: 'notifierID' } );
   };
   return Notifier;
 };

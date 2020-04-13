@@ -1,27 +1,28 @@
 // const logger = require("pino")();
-console.log("before model import");
+// console.log("before model import");
 
-import "./models";
-console.log("after model import");
-import {config, logger} from "./config";
+// import "./models";
+// console.log("after model import");
+// import {config, logger} from "./config";
 
-function main() {
-  logger.info(`Begun initialization of '${config.name}' backend and frontend`);
-}
+// function main() {
+//   logger.info(`Begun initialization of '${config.name}' backend and frontend`);
+// }
 
-main();
-
-
+// main();
 
 
 
-// const express = require("express"),
-//   bodyParser = require("body-parser"),
-//   cors = require("cors"),
-//   history = require("connect-history-api-fallback");
-// // path = require("path");
 
-// const app = express();
+
+const express = require("express"),
+  bodyParser = require("body-parser"),
+  cors = require("cors"),
+  history = require("connect-history-api-fallback");
+
+let path = require("path");
+
+const app = express();
 
 // app.use(express.static("public"));
 // app.use(bodyParser.json());
@@ -37,17 +38,18 @@ main();
 
 // app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
-// const { PORT = 3000 } = process.env;
+const { PORT = 8082 } = process.env;
 
 // API
 // configureAPI(app);
 
 // UI
-// const publicPath = path(__dirname, "../../dist");
-// const staticConf = { maxAge: "1y", etag: false };
+const publicPath = path.resolve(__dirname, "../frontend/dist");
+console.log(__dirname,publicPath);
+const staticConf = { maxAge: "1y", etag: false };
 
-// app.use(express.static(publicPath, staticConf));
-// app.use("/", history());
+app.use(express.static(publicPath, staticConf));
+app.use("/", history());
 
 // Go
-// app.listen(PORT, () => console.log(`App running on port ${PORT}!`));
+app.listen(PORT, () => console.log(`App running on port ${PORT}!`));
