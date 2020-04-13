@@ -25,7 +25,7 @@
     <h3 class="mt-12">Haven't made an Account yet?</h3>
     <div class="mx-5">
       <br />
-      <v-btn large color="purple" class="white--text" href="/SignUp">Sign Up</v-btn>
+      <v-btn large color="purple" class="white--text" to="/SignUp">Sign Up</v-btn>
     </div>
   </div>
 </template>
