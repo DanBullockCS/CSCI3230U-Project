@@ -27,6 +27,15 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id'
       }
     },
+    type: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+      references: {
+        model: 'NotificationTypes',
+        key: 'id',
+      }
+    },
     state: {
       type: DataTypes.INTEGER,
       allowNull: false,

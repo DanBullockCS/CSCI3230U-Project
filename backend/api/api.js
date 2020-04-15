@@ -27,23 +27,7 @@ export default async function initializeAPI(app, config, logger) {
 
   // const app = express();
   graphqlServer.applyMiddleware({ app });
-
-  // db.sequelize.sync().then(() => {
-  //   // populate author table with dummy data
-  //   db.User.bulkCreate(
-  //     times(10, () => ({
-  //       profileId: 2
-  //     }))
-  //   );
-  //   // populate post table with dummy data
-  //   // db.post.bulkCreate(
-  //   //   times(10, () => ({
-  //   //     title: faker.lorem.sentence(),
-  //   //     content: faker.lorem.paragraph(),
-  //   //     authorId: random(1, 10)
-  //   //   }))
-  //   // );
-
+  
   // const router = express.Router();
 
   // app.use(bodyParser);
@@ -85,8 +69,6 @@ export default async function initializeAPI(app, config, logger) {
     if (notifier===null) {
       return res.status(400).json(errorStructure('Token not found.'));
     }
-
-    console.log("found notifier: ",events,Handler);
     
     await Handler.TriggerEvent('NotifierReceived', {
       notifier,
@@ -109,10 +91,3 @@ function errorStructure(msg) {
     location: ""
   }
 }
-
-  // app.get("/api", async (req, res) => {
-  //   // res.json({ the: "Hello World!!!!fs!" });
-  //   let results = await db.User.findAll();
-  //   console.log("RES: ",typeof results[0].id );
-  //   res.json(results)
-  // });

@@ -7,7 +7,6 @@ export var registeredHandlers = {};
 
 class Handler {
   constructor() {
-    console.log('super constr')
   }
 
   setName(name) {
@@ -43,18 +42,12 @@ class Handler {
   }
 
   static async TriggerEvent(eventType, data) {
-    // console.log(`static Triggering event: ${eventType} with args: ${data}`);
-
     let handler = registeredHandlers[eventType];
     try {
-      // handler.setName(eventType);
-      // let results = await handler[eventType](data);
       let results = await handler.runEventHandler(eventType, data);
     } catch (error) {
       console.error(`handler error: ${error}`);
     }
-
-    console.log("done");
   }
 }
 export default Handler;
@@ -68,7 +61,7 @@ class NotifierHandler extends Handler {
 
   @Handler.eventHandler
   async NotifierReceived({ notifier, data }) {
-    let trn = await db.sequelize.transaction();
+    let transaction = await db.sequelize.transaction();
 
     try {
       var event = await db.Event.newEvent(
@@ -79,12 +72,16 @@ class NotifierHandler extends Handler {
             ip: "0.0.0.0"
           }
         },
-        { transaction: trn }
+        { transaction }
       );
 
-      await trn.commit();
+      console.log(event.id,notifier.id)
+      await db.Notifier.jncEvents.add(notifier,event,{ transaction })
+      // await db.Notifier.add( notifier, event, {transaction})
+
+      await transaction.commit();
     } catch (error) {
-      await trn.rollback();
+      await transaction.rollback();
       logger.error(`Failed to insert notification data on notifier received: ${error}`);
     }
 

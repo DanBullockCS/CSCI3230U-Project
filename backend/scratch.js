@@ -1,18 +1,6 @@
-// const logger = require("pino")();
-// console.log("before model import");
 
 // import "./models";
-// console.log("after model import");
 // import {config, logger} from "./config";
-
-// function main() {
-//   logger.info(`Begun initialization of '${config.name}' backend and frontend`);
-// }
-
-// main();
-
-
-
 
 
 const express = require("express"),

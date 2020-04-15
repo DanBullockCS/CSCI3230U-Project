@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
 
       // Notifier.Data = Notifier.hasMany( models.NotificationData, { foreignKey: 'notifierID' } );
 
-      Notifier.belongsToMany( models.Event, { through: "jnc_NotifierEvents", foreignKey: 'notifierID', timestamps: false } )
+      Notifier.jncEvents = Notifier.belongsToMany( models.Event, { through: "jnc_NotifierEvents", foreignKey: 'notifierID', timestamps: false } )
     }
 
     async renderDefaultNotification(event ) {
@@ -40,8 +40,6 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     async renderNotification(event ) {
-      console.log("render notif: ",event);
-
       let renderFunc = this.renderDefaultNotification;
       if (this.extraData.customRenderer !== undefined) {
         renderFunc = this.extraData

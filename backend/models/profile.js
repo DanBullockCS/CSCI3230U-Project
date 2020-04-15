@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-  }, {});
+  }, {
+    paranoid: true,
+  }); 
   Profile.associate = function (models) {
     // associations can be defined here
     // Profile.hasOne( models.User, {foreignKey: "profileID" } )

@@ -16,6 +16,14 @@ module.exports = {
           key: 'id'
         }
       },
+      parentID: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'NotifierGroups',
+          key: 'id',
+        }
+      },
       displayName: {
         type: Sequelize.STRING
       },
