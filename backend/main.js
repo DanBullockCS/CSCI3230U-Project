@@ -1,38 +1,52 @@
-const express = require("express"),
-  bodyParser = require("body-parser"),
-  cors = require("cors"),
-  history = require("connect-history-api-fallback");
-// path = require("path");
+// import { ApolloServer, gql } from "apollo-server-express";
+// import faker from "faker";
+// import times from "lodash.times";
+// import random from "lodash.random";
 
-const app = express();
 
-app.use(express.static("public"));
-app.use(bodyParser.json());
-app.use(cors());
+// import typeDefs from "./api/schema";
+// import resolvers from "./api/resolvers";
 
-var port = process.env.PORT || 8081;
+import express from "express";
+import db from "./models";
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+// import initializeAPI from "./api/api";
+import { config, logger } from "./config";
 
-app.get("/api", (req, res) => {
-  res.json({ the: "Hello World!" });
-});
+import initializeAPI from "./api";
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+async function main() {
+  logger.info(
+    `Begun initialization of ${config.name} backend & frontend.\n\tPort: ${config.port}`
+  );
 
-// const { PORT = 3000 } = process.env;
+  const app = await initializeApp(config, logger); // sets up express app and middleware
 
-// API
-// configureAPI(app);
+  const graphqlServer = await initializeAPI(app, config, logger);
+  
+  app.listen({ port: config.port }, () =>
+    console.log(
+      `🚀 Server ready at http://localhost:${config.port}${graphqlServer.graphqlPath}`
+    )
+  );
+  // await app.listen({ port: config.port } )
+}
 
-// UI
-// const publicPath = path(__dirname, "../../dist");
-// const staticConf = { maxAge: "1y", etag: false };
+async function initializeApp() {
+  const app = express();
 
-// app.use(express.static(publicPath, staticConf));
-// app.use("/", history());
+  app.use(express.static("app/public"));
 
-// Go
-// app.listen(PORT, () => console.log(`App running on port ${PORT}!`));
+  return app;
+}
+
+if (!module.parent) {
+  main()
+    .then(text => {
+      // console.log("main then: ",text);
+    })
+    .catch(err => {
+      console.error("main failed: ", err);
+      // Deal with the fact the chain failed
+    }); // this is the main module
+}
