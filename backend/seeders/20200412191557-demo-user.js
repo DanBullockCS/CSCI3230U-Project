@@ -37,39 +37,39 @@ module.exports = {
     // console.log("user pk: ",res);
     // await res.destroy();
     // console.dir(db.User);
-    let user = await db.User.create({
-      // Profile: { displayName: "First User" },
-      UserGroups: [ {displayName: "Test User Group 1"} ]
-    }, {
-      include: [
-        // db.Profile,
-        db.UserGroup
-      ]
-    });
+    // let user = await db.User.create({
+    //   // Profile: { displayName: "First User" },
+    //   UserGroups: [ {displayName: "Test User Group 1"} ]
+    // }, {
+    //   include: [
+    //     // db.Profile,
+    //     db.UserGroup
+    //   ]
+    // });
     // console.log("create profile: ",user," |");
     // await user.createProfile({displayName: "User #1 profile"})
 
 
-    await db.NotifierGroup.create({
-      displayName: "Test Group 1",
-      ownerID: 1,
-      Notifiers: [ {
-        token: '123',
-        extraData: { hi: 'test' },
-        // NotificationData: [ { data: {title:'Hello', body: "World"} } ]
-      } ]
-    },
-    {
-      include: [ 
-        {
-          // association: db.NotifierGroup.Notifiers,
-          model: db.Notifier,
-          include: [db.Event]
-        }
-        ]
-    });
+    // await db.NotifierGroup.create({
+    //   displayName: "Test Group 1",
+    //   ownerID: 1,
+    //   Notifiers: [ {
+    //     token: '123',
+    //     extraData: { hi: 'test' },
+    //     // NotificationData: [ { data: {title:'Hello', body: "World"} } ]
+    //   } ]
+    // },
+    // {
+    //   include: [ 
+    //     {
+    //       // association: db.NotifierGroup.Notifiers,
+    //       model: db.Notifier,
+    //       include: [db.Event]
+    //     }
+    //     ]
+    // });
 
-    return db.sequelize.sync();
+    // return db.sequelize.sync();
     
     // return Promise.all([
     //   queryInterface.bulkInsert('Users', [{

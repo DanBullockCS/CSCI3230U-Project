@@ -1,6 +1,26 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+
+    await queryInterface.createTable('NotificationTypes', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      data: {
+        type: Sequelize.JSON
+      },
+    },{
+      updatedAt: false,
+      timestamps: false
+    });
+
     await queryInterface.createTable('Notifications', {
       id: {
         allowNull: false,
@@ -14,6 +34,15 @@ module.exports = {
         references: {
           model: 'UserGroups',
           key: 'id'
+        }
+      },
+      type: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
+        references: {
+          model: 'NotificationTypes',
+          key: 'id',
         }
       },
       state: {

@@ -9,14 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      // profileID: {
-      //   type: Sequelize.INTEGER,
-      //   // allowNull: false,
-      //   references: {
-      //     model: 'Profiles',
-      //     key: 'id'
-      //   }
-      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

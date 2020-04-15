@@ -21,14 +21,6 @@ module.exports = {
       timestamps: false
     });
 
-    await queryInterface.bulkInsert('EventTypes', [{
-      name: 'NotifierReceived',
-    }
-    ,{
-      name: 'NotificationSent',
-    },
-  ]);
-
     await queryInterface.createTable('Events', {
       id: {
         allowNull: false,
@@ -52,10 +44,6 @@ module.exports = {
           key: 'id'
         }
       },
-      // creatorID: {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: false,
-      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

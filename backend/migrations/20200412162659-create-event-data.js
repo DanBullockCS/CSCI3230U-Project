@@ -8,14 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      // notifierID: {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: false,
-      //   references: {
-      //     model: 'Notifiers',
-      //     key: 'id'
-      //   }
-      // },
       data: {
         type: Sequelize.JSON,
         allowNull: false,
