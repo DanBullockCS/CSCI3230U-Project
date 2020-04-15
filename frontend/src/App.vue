@@ -43,7 +43,7 @@ export default {
   },
   data: () => ({
     drawer: null,
-    darkmode: false
+    darkmode: false // Default to light mode
   }),
   methods: {
     logoutBtn() {
@@ -51,6 +51,7 @@ export default {
       this.$router.push("/");
     }
   },
+  // Dark mode theme watch
   watch: {
     darkmode(newValue) {
       this.$vuetify.theme.dark = newValue;

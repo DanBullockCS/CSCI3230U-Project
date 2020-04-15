@@ -42,23 +42,23 @@ export default {
 
       let xScale = d3
         .scaleLinear()
-        .domain([0, n - 1]) // input
-        .range([0, width]); // output
+        .domain([0, n - 1])
+        .range([0, width]);
 
       let yScale = d3
         .scaleLinear()
-        .domain([0, 1]) // input
-        .range([height, 0]); // output
+        .domain([0, 1])
+        .range([height, 0]);
 
       let line = d3
         .line()
         .x(function(d, i) {
           return xScale(i);
-        }) // set the x values for the line generator
+        })
         .y(function(d) {
           return yScale(d.y);
-        }) // set the y values for the line generator
-        .curve(d3.curveMonotoneX); // apply smoothing to the line
+        })
+        .curve(d3.curveMonotoneX);
 
       let dataset = d3.range(n).map(function(d) {
         return { y: d3.randomUniform(1)() };

@@ -2,7 +2,7 @@
   <div class="analytics">
     <h3 style="text-align: left;">Analytics</h3>
     <BarChart title="A Bar Chart" xKey="name" yKey="amount" :data="barChartData" />
-    <LineChart title="A Line Chart" />
+    <LineChart title="A Line Chart" :data="barChartData" />
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
       barChartData: [
         {
           name: "S",
-          amount: 56
+          amount: 55
         },
         {
           name: "A",
