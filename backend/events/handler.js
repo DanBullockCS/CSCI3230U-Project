@@ -1,68 +1,99 @@
 import { config, logger } from "../config";
 
-import {Sequelize,sequelize} from "sequelize";
+import { Sequelize, sequelize } from "sequelize";
 import db from "../models";
 
 export var registeredHandlers = {};
 
 class Handler {
-  constructor() {}
+  constructor() {
+    console.log('super constr')
+  }
 
   setName(name) {
     this.name = name;
   }
 
-  static registerEventHandler(handlerName, handlerClass) {
-    if (registeredHandlers[handlerName] === undefined) {
-      registeredHandlers[handlerName] = new handlerClass();
-      registeredHandlers[handlerName].setName(handlerName);
-    } else {
-      logger.error(
-        `Event handler with name '${handlerName}' is already registered, ignoring this one.`
-      );
+  async runEventHandler(name, data) {
+    this.setName(name);
+    return await this[name](data);
+  }
+
+  static eventHandler(descriptor) {
+    descriptor.descriptor.value.eventHandler = true;
+    return descriptor
+  }
+
+  static registerEventHandler(className) {
+    var handler = new className();
+    var methods = Object.getOwnPropertyNames(handler.__proto__);
+    methods.shift();
+
+    for (const handlerName of methods) {
+      if (handler[handlerName].eventHandler) {
+        if (registeredHandlers[handlerName] === undefined) {
+          registeredHandlers[handlerName] = handler;
+        } else {
+          logger.error(
+            `Event handler with name '${handlerName}' is already registered, ignoring this one.`
+          );
+        }
+      }
     }
+  }
+
+  static async TriggerEvent(eventType, data) {
+    // console.log(`static Triggering event: ${eventType} with args: ${data}`);
+
+    let handler = registeredHandlers[eventType];
+    try {
+      // handler.setName(eventType);
+      // let results = await handler[eventType](data);
+      let results = await handler.runEventHandler(eventType, data);
+    } catch (error) {
+      console.error(`handler error: ${error}`);
+    }
+
+    console.log("done");
   }
 }
 export default Handler;
 
-export class NotifierHandler extends Handler {
-  constructor() {
-    super()
 
+export
+class NotifierHandler extends Handler {
+  constructor() {
+    super();
   }
 
-  async run({ notifier, data }) {
-    console.log("notif handler run. ");
-
+  @Handler.eventHandler
+  async NotifierReceived({ notifier, data }) {
     let trn = await db.sequelize.transaction();
 
     try {
-      let notificationData = await db.NotificationData.create({
-        notifierID: notifier.id,
-        data: data,
-        sender: {
-          ip: '0.0.0.0',
-        }
-      }, {
-        include: [
-          db.Notifier
-        ],
-        transaction: trn
-      });
-
-      let event = await db.Event.newEvent( this.name, {
-        notificationDataID: notificationData.id
-      }, {transaction: trn} );
+      var event = await db.Event.newEvent(
+        this.name,
+        {
+          data: data,
+          sender: {
+            ip: "0.0.0.0"
+          }
+        },
+        { transaction: trn }
+      );
 
       await trn.commit();
     } catch (error) {
-      await trn.rollback()
-      logger.error("Failed to insert notification data on notifier received: ", error);
+      await trn.rollback();
+      logger.error(`Failed to insert notification data on notifier received: ${error}`);
     }
 
+    // Inserted the data, now generate the notification.
+    let { title, renderedData } = { a: 1, b: 1 };
+    await notifier.renderNotification(event);
 
-    console.log("done run notifhandle");
-
+    console.log("done run notifhandle", title, renderedData);
   }
 }
-Handler.registerEventHandler("NotifierReceived", NotifierHandler);
+Handler.registerEventHandler(NotifierHandler);
+// Handler.registerEventHandler("NotifierReceived", NotifierHandler);

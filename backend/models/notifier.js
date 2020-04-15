@@ -1,6 +1,57 @@
 'use strict';
+const { Sequelize, Model, DataTypes } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
-  const Notifier = sequelize.define('Notifier', {
+  let db = sequelize.models;
+
+  class Notifier extends Model {
+    constructor(values, options, a) {
+      super(values, options)
+    }
+    static associate(models) {
+
+      Notifier.belongsTo( models.NotifierGroup, {
+        foreignKey: 'notifierGroupID',
+        scope: {
+          status: 'open'
+        }
+      } )
+
+      // Notifier.Data = Notifier.hasMany( models.NotificationData, { foreignKey: 'notifierID' } );
+
+      Notifier.belongsToMany( models.Event, { through: "jnc_NotifierEvents", foreignKey: 'notifierID', timestamps: false } )
+    }
+
+    async renderDefaultNotification(event ) {
+      let models = this.sequelize.models,
+        notificationData = event.EventDatum;
+      console.log("render default: ")
+
+      let title = notificationData.data.title; // TODO: validate?
+
+      let body = JSON.stringify(notificationData.data.body); // TODO: possible html validation?
+
+      await models.Notification.create({
+        groupID: 1,
+        state: 1,
+        title: title,
+        body: body
+      }, {});
+    }
+
+    async renderNotification(event ) {
+      console.log("render notif: ",event);
+
+      let renderFunc = this.renderDefaultNotification;
+      if (this.extraData.customRenderer !== undefined) {
+        renderFunc = this.extraData
+      }
+
+      await renderFunc.call(this, event );
+    }
+  }
+
+  Notifier.init({
     id: {
       primaryKey: true,
       autoIncrement: true,
@@ -22,19 +73,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     extraData: DataTypes.JSON
   }, {
+    sequelize,
     paranoid: true,
   });
-  Notifier.associate = function(models) {
-    // associations can be defined here
-    // Notifier.hasOne( models.NotifierGroup )
-    Notifier.Group = Notifier.belongsTo( models.NotifierGroup, {
-      foreignKey: 'notifierGroupID',
-      scope: {
-        status: 'open'
-      }
-    } )
 
-    Notifier.Data = Notifier.hasMany( models.NotificationData, { foreignKey: 'notifierID' } );
-  };
   return Notifier;
 };

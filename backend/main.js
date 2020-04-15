@@ -43,7 +43,7 @@ async function initializeApp() {
 if (!module.parent) {
   main()
     .then(text => {
-      console.log("main then: ",text);
+      // console.log("main then: ",text);
     })
     .catch(err => {
       console.error("main failed: ", err);

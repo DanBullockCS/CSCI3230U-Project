@@ -3,17 +3,8 @@
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  // const Event = sequelize.define('Event', {
-  //   type: DataTypes.SMALLINT,
-  //   data: DataTypes.JSON
-  // }, {});
-  // Event.associate = function(models) {
-  //   // associations can be defined here
-  // };
-
   class EventType extends Model {
     static associate(models) {
-      console.log("EventType assoc",models);
       EventType.hasMany( models.Event, { foreignKey: 'type' } );
     }
   }

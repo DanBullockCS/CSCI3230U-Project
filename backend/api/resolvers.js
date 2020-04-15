@@ -1,7 +1,19 @@
+function loadColumn(colName, convert=(x) => x) {
+    return async (parent, {}, {db}, info) => {
+        var val = convert((await parent.reload({attributes: [colName]}))[colName])
+        console.log("VAL: ",val," |");
+        return val   
+    };
+}
+
 
 export default {
     Query: {
-        User: (parent, { id }, { db }, info) => db.User.findByPk(id),
+        // User: (parent, { id }, { db }, info) => db.User.findByPk(id),
+        User(parent, { id }, { db }, info) {
+            // console.log(parent,id,info);
+            return db.User.findByPk(id,{attributes: ['id', 'profileId']});
+        },
         Users: (parent, args, { db }, info) => db.User.findAll(),
         
         Notifier: (parent, { id }, { db }, info) => db.Notifier.findByPk(id),
@@ -12,6 +24,10 @@ export default {
         
     },
     User: {
+        async createdAt(parent, {}, {db}, info) {
+            return (await parent.reload({attributes: ['createdAt']})).createdAt;
+        },
+        updatedAt: loadColumn('updatedAt', col => col.toISOString() ),
     },  
     
     Notifier: {

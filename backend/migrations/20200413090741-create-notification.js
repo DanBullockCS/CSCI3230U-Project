@@ -1,43 +1,51 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Notifiers', {
+    await queryInterface.createTable('Notifications', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      notifierGroupID: {
+      groupID: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: 'NotifierGroups',
+          model: 'UserGroups',
           key: 'id'
         }
       },
-      token: {
+      state: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
+      },
+      title: {
         type: Sequelize.STRING,
-        defaultValue: '',
-        unique: true,
-        allowNull: false,
+        allowNull: false
       },
-      extraData: {
-        type: Sequelize.JSON
+      body: {
+        type: Sequelize.JSON,
       },
-      createdAt: {
+      deliveredAt: {
         allowNull: false,
+        defaultValue: Sequelize.NOW,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
       deletedAt: {
         type: Sequelize.DATE
       }
+    },{
+      paranoid: true,
+      updatedAt: false
     });
 
-    await queryInterface.createTable('jnc_NotifierEvents', {
+    await queryInterface.createTable('jnc_NotificationEvents', {
       eventID: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -46,11 +54,11 @@ module.exports = {
           key: 'id',
         }
       },
-      notifierID: {
+      notificationID: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         references: {
-          model: 'Notifiers',
+          model: 'Notifications',
           key: 'id'
         }
       },
@@ -59,7 +67,7 @@ module.exports = {
     return async _ => true
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('jnc_NotifierEvents', {cascade: true })
-    return queryInterface.dropTable('Notifiers',{cascade: true });
+    await queryInterface.dropTable('jnc_NotificationEvents',{cascade: true});
+    return queryInterface.dropTable('Notifications',{cascade: true});
   }
 };

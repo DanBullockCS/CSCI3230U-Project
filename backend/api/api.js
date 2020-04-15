@@ -13,10 +13,10 @@ import db from "../models";
 import Op from "sequelize";
 
 // import {events,handlers} from "../events";
+import {Handler} from "../events";
 import * as events from "../events";
 
 export default async function initializeAPI(app, config, logger) {
-  console.log("WAAAA? ",db.sequelize.sync,db.sequelize.transaction,db.sequelize)
   await db.sequelize.sync();
 
   const graphqlServer = new ApolloServer({
@@ -67,8 +67,6 @@ export default async function initializeAPI(app, config, logger) {
     }
   }),
   async (req, res) => {
-    console.log("Received notify post ", events);
-
     let validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
       return res.status(400).json( validationErrors.array() );
@@ -88,9 +86,9 @@ export default async function initializeAPI(app, config, logger) {
       return res.status(400).json(errorStructure('Token not found.'));
     }
 
-    console.log("found notifier: ",db.transaction);
+    console.log("found notifier: ",events,Handler);
     
-    await events.TriggerEvent('NotifierReceived', {
+    await Handler.TriggerEvent('NotifierReceived', {
       notifier,
       data: req.body.data
     });

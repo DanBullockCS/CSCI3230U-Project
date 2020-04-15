@@ -16,13 +16,6 @@ module.exports = {
       data: {
         type: Sequelize.JSON
       },
-      // createdAt: {
-      //   allowNull: false,
-      //   type: Sequelize.DATE
-      // },
-      // deletedAt: {
-      //   type: Sequelize.DATE
-      // }
     },{
       updatedAt: false,
       timestamps: false
@@ -30,17 +23,13 @@ module.exports = {
 
     await queryInterface.bulkInsert('EventTypes', [{
       name: 'NotifierReceived',
-      // createdAt: new Date(),
-      // deletedAt: new Date()
     }
     ,{
-      name: 'admin',
-      // createdAt: new Date(),
-      // deletedAt: new Date()
+      name: 'NotificationSent',
     },
   ]);
 
-    return queryInterface.createTable('Events', {
+    await queryInterface.createTable('Events', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -55,9 +44,18 @@ module.exports = {
           key: 'id'
         }
       },
-      data: {
-        type: Sequelize.JSON
+      eventDataID: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'EventData',
+          key: 'id'
+        }
       },
+      // creatorID: {
+      //   type: Sequelize.INTEGER,
+      //   allowNull: false,
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -69,9 +67,11 @@ module.exports = {
       paranoid: true,
       updatedAt: false
     });
+    
+    return async () => true;
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Events');
-    return queryInterface.dropTable('EventTypes');
+    await queryInterface.dropTable('Events', {cascade: true});
+    return queryInterface.dropTable('EventTypes',{cascade: true});
   }
 };

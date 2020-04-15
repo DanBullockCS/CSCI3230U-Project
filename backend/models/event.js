@@ -19,19 +19,27 @@ module.exports = (sequelize, DataTypes) => {
       super(values, options)
     }
     static associate(models) {
-      console.log("Event assoc",models);
       Event.belongsTo(models.EventType, {foreignKey: 'type'});
+      Event.belongsTo(models.EventData, {
+        foreignKey: 'eventDataID',
+        scope: {
+          status: 'open'
+        }
+      });
+
+      Event.belongsToMany( models.Notifier, { through: "jnc_NotifierEvents", foreignKey: 'eventID', timestamps: false } )
+      Event.belongsToMany( models.Notification, { through: "jnc_NotificationEvents", foreignKey: 'eventID', timestamps: false } )
     }
 
     static async newEvent(eventType, data, options={}) {
-      console.log("WAT: ",this,"db: ",db,'  !');
       let type = await sequelize.models.EventType.findOne({ where:{ name: eventType } },options);
 
       let event = await db.Event.create({
         type: type.id,
-        data: data
+        // data: data
+        EventDatum: data
       }, Object.assign( {
-        include: [ db.EventType ],
+        include: [ db.EventData ],
         // updatedAt: false,
         // timestamps: false,
         // silent: true,
@@ -50,9 +58,14 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id'
       }
     },
-    data: {
-      type: DataTypes.JSON,
-    }
+    eventDataID: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'EventData',
+        key: 'id'
+      }
+    },
   }, {
     sequelize,
     // modelName: "Event"

@@ -36,15 +36,18 @@ module.exports = {
     // let res = await db.User.findByPk(1);
     // console.log("user pk: ",res);
     // await res.destroy();
-
-    await db.User.create({
-      profileId: 1,
+    // console.dir(db.User);
+    let user = await db.User.create({
+      // Profile: { displayName: "First User" },
       UserGroups: [ {displayName: "Test User Group 1"} ]
     }, {
       include: [
+        // db.Profile,
         db.UserGroup
       ]
     });
+    // console.log("create profile: ",user," |");
+    // await user.createProfile({displayName: "User #1 profile"})
 
 
     await db.NotifierGroup.create({
@@ -53,7 +56,7 @@ module.exports = {
       Notifiers: [ {
         token: '123',
         extraData: { hi: 'test' },
-        NotificationData: [ { data: {title:'Hello', body: "World"} } ]
+        // NotificationData: [ { data: {title:'Hello', body: "World"} } ]
       } ]
     },
     {
@@ -61,7 +64,7 @@ module.exports = {
         {
           // association: db.NotifierGroup.Notifiers,
           model: db.Notifier,
-          include: [db.NotificationData]
+          include: [db.Event]
         }
         ]
     });

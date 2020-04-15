@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Notifier',
+        model: sequelize.models.Notifier,
         key: 'id'
       }
     },

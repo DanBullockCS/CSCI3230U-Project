@@ -13,6 +13,8 @@ type Query {
 type User {
   id: ID!
   profileId: Int!
+  createdAt: String
+  updatedAt: String
 }
 
 type Notifier {
