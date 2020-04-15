@@ -5,8 +5,8 @@
     <v-form class="mt-5" @submit="checkFormUser" action="/" method="post">
       <v-col cols="2" sm="6">
         <div class="mx-5">
-          <v-text-field v-model="username" label="Old Username" outlined shaped></v-text-field>
-          <v-text-field v-model="newUsername" label="New Username" outlined shaped></v-text-field>
+          <v-text-field v-model="username" label="Old Username" outlined shaped clearable></v-text-field>
+          <v-text-field v-model="newUsername" label="New Username" outlined shaped clearable></v-text-field>
           <v-btn class="mx-5" large color="primary" type="submit" value="Submit">Change</v-btn>
         </div>
       </v-col>
