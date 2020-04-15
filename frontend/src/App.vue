@@ -60,7 +60,7 @@ export default {
   computed: {
     checkUser() {
       if (this.$store.state.username) {
-        return false; // or === 0
+        return false;
       } else {
         return true;
       }
@@ -68,7 +68,7 @@ export default {
 
     checkUser2() {
       if (this.$store.state.username) {
-        return true; // or === 0
+        return true;
       } else {
         return false;
       }

@@ -4,7 +4,7 @@
 
     <v-container class="my-5" fluid>
       <v-layout row wrap>
-        <v-flex v-for="(i, index) in group" :key="i.name">
+        <v-flex v-for="(i, index) in this.$store.state.group" :key="i.name">
           <v-card class="mx-auto" max-width="344" outlined>
             <v-list-item three-line>
               <v-list-item-content>
@@ -30,52 +30,13 @@
 export default {
   name: "Home",
   data() {
-    return {
-      group: [
-        {
-          name: "Sinthooran",
-          age: 21,
-          notification: "Work",
-          message: "Web Dev Time"
-        },
-        {
-          name: "Daniel",
-          age: 21,
-          notification: "Work",
-          message: "Web Dev Time"
-        },
-        {
-          name: "Alex",
-          age: 21,
-          notification: "Work",
-          message: "Web Dev Time"
-        },
-        {
-          name: "Nate",
-          age: 21,
-          notification: "Work",
-          message: "Web Dev Time"
-        },
-        {
-          name: "Gavin",
-          age: "21",
-          notification: "CV",
-          message: "CV Time"
-        },
-        {
-          name: "Sammy",
-          age: "21",
-          notification: "MPAC",
-          message: "MPAC Time"
-        }
-      ]
-    };
+    return {};
   },
   methods: {
     deleteCard: function(e) {
-      this.$store.state.deleted.push(this.group.splice(e, 1));
-      console.log(this.$store.state.deleted);
-      // console.log(this.$store.state.deleted[1].name);
+      let temp = this.$store.state.group[e];
+      this.$store.state.deleted.push(temp);
+      this.$store.state.group.splice(e, 1);
     }
   }
 };
