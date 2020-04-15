@@ -7,9 +7,9 @@
           <template v-slot:append>
             <div class="pa-2">
               <v-switch v-model="darkmode" label="Dark Mode"></v-switch>
-              <v-btn class="mb-2 primary" to="Login" block>Login</v-btn>
-              <v-btn class="mb-2 primary" to="SignUp" block>Sign Up</v-btn>
-              <v-btn block>Logout</v-btn>
+              <v-btn class="mb-2 primary" to="Login" block v-show="checkUser">Login</v-btn>
+              <v-btn class="mb-2 primary" to="SignUp" block v-show="checkUser">Sign Up</v-btn>
+              <v-btn block v-show="checkUser2" @click="logoutBtn">Logout</v-btn>
             </div>
           </template>
         </v-navigation-drawer>
@@ -45,9 +45,32 @@ export default {
     drawer: null,
     darkmode: false
   }),
+  methods: {
+    logoutBtn() {
+      this.$store.state.username = "";
+      this.$router.push("/");
+    }
+  },
   watch: {
     darkmode(newValue) {
       this.$vuetify.theme.dark = newValue;
+    }
+  },
+  computed: {
+    checkUser() {
+      if (this.$store.state.username) {
+        return false; // or === 0
+      } else {
+        return true;
+      }
+    },
+
+    checkUser2() {
+      if (this.$store.state.username) {
+        return true; // or === 0
+      } else {
+        return false;
+      }
     }
   }
 };

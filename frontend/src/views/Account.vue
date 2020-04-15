@@ -2,6 +2,7 @@
   <div class="account">
     <h3>Account Preferences</h3>
     <h3 class="mt-5">Change Username:</h3>
+    <h4>Currently known as {{this.$store.state.username}}</h4>
     <v-form class="mt-5" @submit="checkFormUser" action="/" method="post">
       <v-col cols="2" sm="6">
         <div class="mx-5">
@@ -101,7 +102,9 @@ export default {
   methods: {
     checkFormUser: function(e) {
       if (this.username && this.newUsername) {
+        this.$store.state.username = this.newUsername;
         this.$router.push("/");
+
         return true;
       }
 
@@ -118,7 +121,12 @@ export default {
 
     //P
     checkFormPassword: function(e) {
-      if (this.password && this.newPassword && this.confirmNewPassword) {
+      if (
+        this.password &&
+        this.newPassword &&
+        this.confirmNewPassword &&
+        this.newPassword == this.confirmNewPassword
+      ) {
         this.$router.push("/");
         return true;
       }
@@ -133,6 +141,9 @@ export default {
       }
       if (!this.confirmNewPassword) {
         this.errPassword.push("New Password confirmation required.");
+      }
+      if (this.newPassword != this.confirmNewPassword) {
+        this.errPassword.push("Passwords do not Match.");
       }
       e.preventDefault();
     },

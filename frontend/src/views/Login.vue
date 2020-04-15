@@ -43,6 +43,7 @@ export default {
   methods: {
     checkForm: function(e) {
       if (this.username && this.password) {
+        this.$store.state.username = this.username;
         this.$router.push("/");
         return true;
       }

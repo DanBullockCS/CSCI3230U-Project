@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h3>Home</h3>
+    <h3>Welcome {{this.$store.state.username}}</h3>
 
     <v-container class="my-5" fluid>
       <v-layout row wrap>
@@ -68,13 +68,14 @@ export default {
           notification: "MPAC",
           message: "MPAC Time"
         }
-      ],
-      deleted: []
+      ]
     };
   },
   methods: {
     deleteCard: function(e) {
-      this.deleted = this.group.splice(e, 1);
+      this.$store.state.deleted.push(this.group.splice(e, 1));
+      console.log(this.$store.state.deleted);
+      // console.log(this.$store.state.deleted[1].name);
     }
   }
 };

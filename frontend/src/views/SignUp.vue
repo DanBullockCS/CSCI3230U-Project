@@ -47,8 +47,10 @@ export default {
         this.username &&
         this.password &&
         this.email &&
-        this.confirmPassword
+        this.confirmPassword &&
+        this.password == this.confirmPassword
       ) {
+        this.$store.state.username = this.username;
         this.$router.push("/");
         return true;
       }
@@ -66,6 +68,9 @@ export default {
       }
       if (!this.confirmPassword) {
         this.err.push("Password confirmation required.");
+      }
+      if (this.password != this.confirmPassword) {
+        this.err.push("Passwords do not Match.");
       }
       e.preventDefault();
     }
