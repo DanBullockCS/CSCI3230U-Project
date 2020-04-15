@@ -9,9 +9,13 @@
 <script>
 import * as d3 from "d3";
 
+// Pixels of elements
+let drawerWidth = 256;
+let appBarandFooter = 100;
+
 var margin = { top: 50, right: 50, bottom: 50, left: 50 },
-  width = window.innerWidth - margin.left - margin.right, // Use the window's width
-  height = window.innerHeight - margin.top - margin.bottom; // Use the window's height
+  width = window.innerWidth - drawerWidth - margin.left - margin.right, // Use the window's width
+  height = window.innerHeight - appBarandFooter - margin.top - margin.bottom; // Use the window's height
 
 export default {
   name: "LineChart",
@@ -34,7 +38,7 @@ export default {
   methods: {
     plot() {
       // The number of datapoints
-      let n = 21;
+      let n = 10;
 
       let xScale = d3
         .scaleLinear()

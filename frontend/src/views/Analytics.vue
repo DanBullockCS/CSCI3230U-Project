@@ -23,7 +23,7 @@ export default {
       barChartData: [
         {
           name: "S",
-          amount: 54
+          amount: 56
         },
         {
           name: "A",
