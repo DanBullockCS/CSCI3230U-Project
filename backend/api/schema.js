@@ -1,6 +1,10 @@
 export default `
 scalar Date
 
+type Mutation {
+  test(id: ID): String
+}
+
 type Query {
   Profile(id: ID!): Profile
   # Profiles: [Profile!]!
@@ -38,11 +42,13 @@ type Profile {
 
 type User {
   id: ID!
-  Profile: Profile!
-  Groups: [UserGroup]
+  name: String!
   createdAt: Date!
   updatedAt: Date!
+  Profile: Profile!
+  Groups: [UserGroup]
 }
+
 type UserGroup {
   id: ID!
   Users: [User!]!
@@ -93,12 +99,12 @@ type Notifier implements EventCreator {
   deletedAt: Date!
 }
 type NotifierGroup {
-  id: ID!
+  id: ID
   displayName: String
   Parent: NotifierGroup
   Children: [NotifierGroup]
-  Owner: UserGroup!
-  Notifiers: [Notifier!]!
+  Owner: UserGroup
+  Notifiers: [Notifier!]
   extraData: String
   createdAt: Date!
   updatedAt: Date!
