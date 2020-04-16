@@ -7,6 +7,7 @@ import Trash from "../views/Trash.vue";
 import Analytics from "../views/Analytics.vue";
 import Login from "../views/Login.vue";
 import SignUp from "../views/SignUp.vue";
+import CreateNotifier from "../views/CreateNotifier.vue";
 
 Vue.use(VueRouter);
 
