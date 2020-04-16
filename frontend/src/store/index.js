@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import darkmodeUI from './darkmodeUI'
 
 Vue.use(Vuex);
 
@@ -9,9 +10,7 @@ export default new Vuex.Store({
     deleted: [],
     username: "",
   },
-  mutations: {
-
-  },
+  mutations: {},
   actions: {},
-  modules: {}
+  modules: { darkmodeUI }
 });
