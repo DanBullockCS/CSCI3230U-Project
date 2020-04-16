@@ -1,9 +1,28 @@
 <template>
   <div class="notifier">
-    <v-switch v-model="darkmode" label="Dark Mode"></v-switch>
-    <h3>Create Notifier</h3>
+    <v-btn v-on:click="modalToggle()">Modal</v-btn>
 
-    <v-form class="mt-5" action="/" method="post">
+    <v-dialog v-model="isVisible" width="500">
+      <v-card>
+        <v-card-title class="headline grey">Create Notifier</v-card-title>
+
+        <v-card-actions>
+          <v-text-field v-model="token" label="Token" outlined shaped clearable></v-text-field>
+        </v-card-actions>
+        <v-card-actions>
+          <v-textarea label="Custom Handler" outlined shaped clearable></v-textarea>
+        </v-card-actions>
+        <v-card-actions>
+          <v-textarea label="Extra Data" outlined shaped clearable></v-textarea>
+        </v-card-actions>
+
+        <v-card-actions>
+          <v-btn color="success" type="submit" value="Save">Save</v-btn>
+          <v-btn v-on:click="modalToggle()">Exit</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- <v-form class="modal" action="/" method="post">
       <v-col cols="2" sm="6">
         <div class="mx-5">
           <v-text-field v-model="token" label="Token" outlined shaped clearable></v-text-field>
@@ -11,30 +30,28 @@
           <v-textarea label="Extra Data" outlined shaped clearable></v-textarea>
         </div>
 
-        <v-btn v-on:click="close()" value="Cancel">Cancel</v-btn>
-        <v-btn color="success" type="submit" value="Save">Save</v-btn>
+        <v-btn color="danger" type="submit" value="Cancel">Cancel</v-btn>
       </v-col>
-    </v-form>
+    </v-form>-->
   </div>
 </template>
 
 <script>
 export default {
-  name: "Settings",
-  // Dark mode Theme
-  computed: {
-    darkmode: {
-      get() {
-        return this.$store.getters.isDark;
-      },
-      set() {
-        this.$store.commit("toggleDarkMode");
-        if (this.$store.getters.isDark) {
-          this.$vuetify.theme.dark = true;
-        } else {
-          this.$vuetify.theme.dark = false;
-        }
-      }
+  name: "Notifier",
+  data() {
+    return {
+      token: "",
+      isVisible: false
+    };
+  },
+  methods: {
+    close: function() {
+      this.$emit("close");
+    },
+
+    modalToggle: function() {
+      this.isVisible = !this.isVisible;
     }
   }
 };
