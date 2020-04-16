@@ -12,6 +12,7 @@
                 <v-list-item-title class="headline mb-1">From: {{i.name}}</v-list-item-title>
                 <v-list-item-title class="headline mb-1">Age: {{i.age}}</v-list-item-title>
                 <v-list-item-subtitle>Message: {{i.message}}</v-list-item-subtitle>
+                <v-list-item-subtitle>Message: {{Notification}}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
 
@@ -27,8 +28,20 @@
 </template>
 
 <script>
+import gql from "graphql-tag";
+
 export default {
   name: "Home",
+  apollo: {
+    Notification: gql`
+      query {
+        Notification(id: 1) {
+          title
+          body
+        }
+      }
+    `
+  },
   data() {
     return {};
   },
