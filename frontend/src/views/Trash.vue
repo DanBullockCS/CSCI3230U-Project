@@ -2,29 +2,35 @@
   <div class="trash">
     <h3>Trash</h3>
 
-    <v-container class="my-5" fluid>
-      <v-layout row wrap>
-        <v-flex v-for="(i,index) in this.$store.state.deleted" :key="i.name">
-          <v-card class="mx-auto" max-width="344" outlined>
-            <v-list-item three-line>
-              <v-list-item-content>
-                <div class="overline mb-4">{{i.notification}}</div>
-                <v-list-item-title class="headline mb-1">From: {{i.name}}</v-list-item-title>
-                <v-list-item-title class="headline mb-1">Age: {{i.age}}</v-list-item-title>
-                <v-list-item-subtitle>Message: {{i.message}}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
+    <v-row>
+      <v-col cols="2" sm="6">
+        <v-expansion-panels accordion focusable>
+          <v-expansion-panel v-for="(i, index) in this.$store.state.deleted" :key="i.title">
+            <div>
+              <v-expansion-panel-header>
+                <h4 class="text-left">{{i.title}}</h4>
+                <label class="text-right">Recieved {{convertTime(i.deliveredAt)}} hours ago</label>
+              </v-expansion-panel-header>
+            </div>
 
-            <v-card-actions>
-              <v-btn text @click="restoreCard(index)">Restore</v-btn>
-              <v-btn text @click="deleteCard(index)">Delete</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-container>
+            <v-expansion-panel-content class="pt-2">Message: {{i.body}}</v-expansion-panel-content>
+            <v-expansion-panel-content>Created {{convertTime(i.createdAt)}} hours ago</v-expansion-panel-content>
+            <v-expansion-panel-content>
+              <v-btn text class="mr-5" outlined v-on:click="onRestore(index)">
+                <v-icon left>mdi-file-restore-outline</v-icon>Restore
+              </v-btn>
+              <v-btn text outlined v-on:click="onDelete(index)">
+                <v-icon left>mdi-trash-can</v-icon>Delete
+              </v-btn>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </v-col>
+    </v-row>
 
-    <v-btn text @click="emptyAllAlert" block :disabled="disableBtn">Empty</v-btn>
+    <v-btn text v-on:click="emptyAllAlert" class="text-left" :disabled="disableBtn">
+      <v-icon left>mdi-trash-can</v-icon>Empty Trash
+    </v-btn>
 
     <v-alert type="error" v-if="emptyWarning == true">
       <b>Are you sure?</b>
@@ -37,6 +43,7 @@
 </template>
 
 <script>
+import gql from "graphql-tag";
 export default {
   data() {
     return {
@@ -44,14 +51,40 @@ export default {
       disableEmpty: false
     };
   },
+  apollo: {
+    Notifications: gql`
+      query {
+        Notifications {
+          title
+          body
+          createdAt
+          deliveredAt
+        }
+      }
+    `,
+    Notifications: gql`
+      query {
+        Notifications {
+          title
+          body
+          createdAt
+          deliveredAt
+        }
+      }
+    `
+  },
   methods: {
-    restoreCard: function(e) {
+    onRestore: function(e) {
       let temp = this.$store.state.deleted[e];
-      this.$store.state.group.push(temp);
+      this.Notifications.push(temp);
       this.$store.state.deleted.splice(e, 1);
     },
-    deleteCard: function(e) {
+    onDelete: function(e) {
       this.$store.state.deleted.splice(e, 1);
+    },
+    convertTime: function(e) {
+      let msConvert = (e / (1000 * 60 * 60)) % 24;
+      return Math.floor(msConvert);
     },
     emptyAllAlert() {
       this.emptyWarning = true;

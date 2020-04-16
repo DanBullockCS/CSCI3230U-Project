@@ -2,7 +2,7 @@
   "development": {
     "dialect": "postgres",
     "username": "postgres",
-    "password": "dan",
+    "password": "development",
     "database": "webdev",
     "host": "127.0.0.1",
     "operatorsAliases": false
