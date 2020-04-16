@@ -41,9 +41,20 @@
         <v-list-item-title>D3 Analytics</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
+    <v-switch v-model="darkmode" label="Dark Mode"></v-switch>
   </v-list>
 </template>
 
 <script>
-export default {};
+export default {
+  // Dark mode theme watch
+  data: () => ({
+    darkmode: false // Default to light mode
+  }),
+  watch: {
+    darkmode(newValue) {
+      this.$vuetify.theme.dark = newValue;
+    }
+  }
+};
 </script>

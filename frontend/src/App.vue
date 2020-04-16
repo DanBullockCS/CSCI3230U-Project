@@ -4,14 +4,11 @@
       <v-content>
         <v-navigation-drawer v-model="drawer" app>
           <Drawer />
-          <template v-slot:append>
-            <div class="pa-2">
-              <v-switch v-model="darkmode" label="Dark Mode"></v-switch>
-              <v-btn class="mb-2 primary" to="Login" block v-show="checkUser">Login</v-btn>
-              <v-btn class="mb-2 primary" to="SignUp" block v-show="checkUser">Sign Up</v-btn>
-              <v-btn block v-show="checkUser2" @click="logoutBtn">Logout</v-btn>
-            </div>
-          </template>
+          <div class="pa-2">
+            <v-btn class="mb-2 primary" to="Login" block v-show="checkUser">Login</v-btn>
+            <v-btn class="mb-2 primary" to="SignUp" block v-show="checkUser">Sign Up</v-btn>
+            <v-btn block v-show="checkUser2" @click="logoutBtn">Logout</v-btn>
+          </div>
         </v-navigation-drawer>
 
         <v-container fluid>
@@ -42,19 +39,12 @@ export default {
     source: String
   },
   data: () => ({
-    drawer: null,
-    darkmode: false // Default to light mode
+    drawer: null
   }),
   methods: {
     logoutBtn() {
       this.$store.state.username = "";
       this.$router.push("/");
-    }
-  },
-  // Dark mode theme watch
-  watch: {
-    darkmode(newValue) {
-      this.$vuetify.theme.dark = newValue;
     }
   },
   computed: {
@@ -76,3 +66,25 @@ export default {
   }
 };
 </script>
+
+<style>
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #272727;
+  border-left: 1px solid #272727;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3c3c3c;
+  border: solid 3px #272727;
+  border-radius: 7px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: white;
+}
+</style>

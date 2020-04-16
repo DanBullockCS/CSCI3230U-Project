@@ -24,8 +24,7 @@ export default {
     data: Array
   },
   mounted() {
-    this.svgWidth =
-      document.getElementById("line-container").offsetWidth * 0.75;
+    this.svgWidth = document.getElementById("line-container").offsetWidth / 1.5;
     this.AddResizeListener();
     this.plot();
   },
@@ -109,7 +108,7 @@ export default {
         this.$data.redrawToggle = false;
         this.$data.redrawToggle = true;
         this.$data.svgWidth =
-          document.getElementById("line-container").offsetWidth * 0.75;
+          document.getElementById("line-container").offsetWidth / 1.5;
         this.plot();
       });
     }

@@ -55,6 +55,15 @@ npm run lint
 ```bash
 npm install
 ```
+* PostgreSQL was used as our Database, you can download the latest version here: https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+* To run the database create a db called "webdev."
+* Be sure to edit the config.json in backend/config to reflect your postgres login credentials.
+
+#### Run
+
+```bash
+npm run start
+```
 
 #### Hot-reloads for development
 
@@ -62,12 +71,6 @@ npm install
 
 ```bash
 npm run debug
-```
-
-#### Run
-
-```bash
-npm run
 ```
 
 #### Run your unit tests

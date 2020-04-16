@@ -4,21 +4,20 @@
 
     <v-container class="my-5" fluid>
       <v-layout row wrap>
-        <v-flex v-for="(i, index) in this.$store.state.group" :key="i.name">
+        <v-flex v-for="(i, index) in Notifications" :key="i.name">
           <v-card class="mx-auto" max-width="344" outlined>
             <v-list-item three-line>
               <v-list-item-content>
-                <div class="overline mb-4">{{i.notification}}</div>
-                <v-list-item-title class="headline mb-1">From: {{i.name}}</v-list-item-title>
-                <v-list-item-title class="headline mb-1">Age: {{i.age}}</v-list-item-title>
-                <v-list-item-subtitle>Message: {{i.message}}</v-list-item-subtitle>
-                <v-list-item-subtitle>Message: {{Notification}}</v-list-item-subtitle>
+                <div class="overline mb-4">{{i.__typename}}</div>
+                <v-list-item-title class="headline mb-1">{{i.title}}</v-list-item-title>
+                <v-list-item-subtitle>{{i.body}}</v-list-item-subtitle>
+                <v-list-item-subtitle>Created: {{i.createdAt}}</v-list-item-subtitle>
+                <v-list-item-subtitle>Delivered: {{i.deliveredAt}}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
 
             <v-card-actions>
               <v-btn text @click="deleteCard(index)">Delete</v-btn>
-              <v-btn text>Reply</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -33,11 +32,13 @@ import gql from "graphql-tag";
 export default {
   name: "Home",
   apollo: {
-    Notification: gql`
+    Notifications: gql`
       query {
-        Notification(id: 1) {
+        Notifications {
           title
           body
+          createdAt
+          deliveredAt
         }
       }
     `
