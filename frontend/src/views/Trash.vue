@@ -86,14 +86,14 @@ export default {
       let msConvert = (e / (1000 * 60 * 60)) % 24;
       return Math.floor(msConvert);
     },
-    emptyAllAlert() {
+    emptyAllAlert: function() {
       this.emptyWarning = true;
     },
-    emptyAllYes() {
+    emptyAllYes: function() {
       this.$store.state.deleted = [];
       this.emptyWarning = false;
     },
-    emptyAllNo() {
+    emptyAllNo: function() {
       this.emptyWarning = false;
     }
   },

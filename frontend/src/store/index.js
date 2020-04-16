@@ -9,6 +9,8 @@ export default new Vuex.Store({
     group: [],
     deleted: [],
     username: "",
+    email: "",
+    password: "",
   },
   mutations: {},
   actions: {},

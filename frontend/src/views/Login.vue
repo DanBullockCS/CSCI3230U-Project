@@ -42,8 +42,9 @@ export default {
   },
   methods: {
     checkForm: function(e) {
-      if (this.username && this.password) {
+      if (this.username && this.password && this.password.length >= 8) {
         this.$store.state.username = this.username;
+        this.$store.state.password = this.password;
         this.$router.push("/");
         return true;
       }
@@ -55,6 +56,13 @@ export default {
       }
       if (!this.password) {
         this.err.push("Password required.");
+      }
+      if (this.password.length < 8) {
+        this.err.push(
+          "Password needs at least 8 characters currently only have " +
+            this.password.length +
+            " Characters"
+        );
       }
       e.preventDefault();
     }

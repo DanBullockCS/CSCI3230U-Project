@@ -2,7 +2,7 @@
   <div class="account">
     <h3>Account Preferences</h3>
     <h3 class="mt-5">Change Username:</h3>
-    <h4>Currently known as {{this.$store.state.username}}</h4>
+    <h4>Current Username: {{this.$store.state.username}}</h4>
     <v-form class="mt-5" @submit="checkFormUser" action="/" method="post">
       <v-col cols="2" sm="6">
         <div class="mx-5">
@@ -22,6 +22,7 @@
     </v-alert>
 
     <h3 class="mt-12">Change Password:</h3>
+    <!-- <h4>Current Email: {{this.$store.state.password}}</h4> -->
     <v-form class="mt-5" @submit="checkFormPassword" action="/" method="post">
       <v-col cols="2" sm="6">
         <div class="mx-5">
@@ -63,6 +64,7 @@
     </v-alert>
 
     <h3 class="mt-12">Change Email Address</h3>
+    <h4>Current Email: {{this.$store.state.email}}</h4>
     <v-form class="mt-5" @submit="checkFormEmail" action="/" method="post">
       <v-col cols="2" sm="6">
         <div class="mx-5">
@@ -101,7 +103,11 @@ export default {
   },
   methods: {
     checkFormUser: function(e) {
-      if (this.username && this.newUsername) {
+      if (
+        this.username &&
+        this.newUsername &&
+        this.$store.state.username == this.username
+      ) {
         this.$store.state.username = this.newUsername;
         this.$router.push("/");
 
@@ -110,7 +116,7 @@ export default {
 
       this.errUser = [];
 
-      if (!this.username) {
+      if (!this.username || this.username != this.$store.state.username) {
         this.errUser.push("Old Username required.");
       }
       if (!this.newUsername) {
@@ -125,16 +131,26 @@ export default {
         this.password &&
         this.newPassword &&
         this.confirmNewPassword &&
-        this.newPassword == this.confirmNewPassword
+        this.$store.state.password == this.password &&
+        this.newPassword == this.confirmNewPassword &&
+        this.newPassword.length >= 8
       ) {
+        this.$store.state.password = this.newPassword;
         this.$router.push("/");
         return true;
       }
 
       this.errPassword = [];
 
-      if (!this.password) {
+      if (!this.password || this.password != this.$store.state.password) {
         this.errPassword.push("Old Password required.");
+      }
+      if (this.newPassword.length < 8) {
+        this.errPassword.push(
+          "New Password needs at least 8 characters currently only have " +
+            this.newPassword.length +
+            " Characters"
+        );
       }
       if (!this.newPassword) {
         this.errPassword.push("New Password required.");
@@ -150,14 +166,19 @@ export default {
 
     //Email
     checkFormEmail: function(e) {
-      if (this.email && this.newEmail) {
+      if (
+        this.email &&
+        this.newEmail &&
+        this.$store.state.email == this.email
+      ) {
+        this.$store.state.email = this.newEmail;
         this.$router.push("/");
         return true;
       }
 
       this.errEmail = [];
 
-      if (!this.email) {
+      if (!this.email || this.email != this.$store.state.email) {
         this.errEmail.push("Old Email required.");
       }
       if (!this.newEmail) {

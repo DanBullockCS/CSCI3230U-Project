@@ -48,9 +48,12 @@ export default {
         this.password &&
         this.email &&
         this.confirmPassword &&
-        this.password == this.confirmPassword
+        this.password == this.confirmPassword &&
+        this.password.length >= 8
       ) {
         this.$store.state.username = this.username;
+        this.$store.state.email = this.email;
+        this.$store.state.password = this.password;
         this.$router.push("/");
         return true;
       }
@@ -62,6 +65,13 @@ export default {
       }
       if (!this.password) {
         this.err.push("Password required.");
+      }
+      if (this.password.length < 8) {
+        this.err.push(
+          "Password needs at least 8 characters currently only have " +
+            this.password.length +
+            " Characters"
+        );
       }
       if (!this.email) {
         this.err.push("Email required.");

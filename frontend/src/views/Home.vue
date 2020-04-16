@@ -19,10 +19,6 @@
               <v-btn text class="mr-5" outlined v-on:click="onDelete(index)">
                 <v-icon left>mdi-trash-can</v-icon>Delete
               </v-btn>
-              <v-btn v-on:click="replyCall" text outlined>
-                <v-icon left>mdi-pencil</v-icon>Reply
-              </v-btn>
-              <!-- <v-text-field v-if="replyFlag == true" label="Reply Message"></v-text-field> -->
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -46,22 +42,10 @@ export default {
           deliveredAt
         }
       }
-    `,
-    Notifications: gql`
-      query {
-        Notifications {
-          title
-          body
-          createdAt
-          deliveredAt
-        }
-      }
     `
   },
   data() {
-    return {
-      replyFlag: false
-    };
+    return {};
   },
   methods: {
     onDelete: function(e) {
@@ -73,10 +57,6 @@ export default {
     convertTime: function(e) {
       let msConvert = (e / (1000 * 60 * 60)) % 24;
       return Math.floor(msConvert);
-    },
-    replyCall() {
-      return (this.replyFlag = true);
-      console.log(this.replyFlag);
     }
   }
 };
