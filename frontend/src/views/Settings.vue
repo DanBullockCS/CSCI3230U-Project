@@ -1,5 +1,6 @@
 <template>
   <div class="notifier">
+    <v-switch v-model="darkmode" label="Dark Mode"></v-switch>
     <h3>Create Notifier</h3>
 
     <v-form class="mt-5" action="/" method="post">
@@ -19,6 +20,22 @@
 
 <script>
 export default {
-  name: "Settings"
+  name: "Settings",
+  // Dark mode Theme
+  computed: {
+    darkmode: {
+      get() {
+        return this.$store.getters.isDark;
+      },
+      set() {
+        this.$store.commit("toggleDarkMode");
+        if (this.$store.getters.isDark) {
+          this.$vuetify.theme.dark = true;
+        } else {
+          this.$vuetify.theme.dark = false;
+        }
+      }
+    }
+  }
 };
 </script>
