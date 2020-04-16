@@ -10,7 +10,7 @@ const cache = new InMemoryCache();
 const apolloClient = new ApolloClient({
   uri: "http://localhost:8081/graphql",
   cache,
-  resolvers:{}
+  resolvers: {}
 });
 
 export default new VueApollo({
