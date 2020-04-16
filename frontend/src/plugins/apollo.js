@@ -8,6 +8,7 @@ Vue.use(VueApollo);
 const cache = new InMemoryCache();
 
 const apolloClient = new ApolloClient({
+  uri: "http://192.168.0.10:8081/graphql",
   cache,
   resolvers:{}
 });
