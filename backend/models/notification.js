@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     }
     static associate(models) {
       // Notification.belongsTo(models.NotificationGroup, {foreignKey: 'groupID'});
-      Notification.belongsTo(models.UserGroup, {foreignKey: 'groupID'});
+      
+      Notification.belongsTo(models.NotifierGroup, {foreignKey: 'groupID'});
       Notification.belongsToMany( models.Event, { through: "jnc_NotificationEvents", foreignKey: 'notificationID', timestamps: false } )
     }
   }

@@ -8,32 +8,48 @@ import Analytics from "../views/Analytics.vue";
 import Login from "../views/Login.vue";
 import SignUp from "../views/SignUp.vue";
 
+import store from "@/store"
+
 Vue.use(VueRouter);
+
+function is_logged_in(to, from, next){
+  next(); //couldnt' finish it
+  // if(store.state.loggedIn) {
+  //     next(); // allow to enter route
+  // } else{
+  //     next('/login'); // go to '/login';
+  // }
+}
 
 const routes = [
   {
     path: "/",
     name: "Home",
+    beforeEnter: is_logged_in,
     component: Home
   },
   {
     path: "/Account",
     name: "Account",
+    beforeEnter: is_logged_in,
     component: Account
   },
   {
     path: "/Settings",
     name: "Settings",
+    beforeEnter: is_logged_in,
     component: Settings,
   },
   {
     path: "/Trash",
     name: "Trash",
+    beforeEnter: is_logged_in,
     component: Trash
   },
   {
     path: "/Analytics",
     name: "Analytics",
+    beforeEnter: is_logged_in,
     component: Analytics
   },
   {

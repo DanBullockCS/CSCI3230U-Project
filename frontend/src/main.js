@@ -6,8 +6,9 @@ import vuetify from "./plugins/vuetify";
 import apolloProvider from "./plugins/apollo";
 
 Vue.config.productionTip = false;
+// Vue.prototype.$apollo = apolloProvider
 
-console.log("Pollo: ",apolloProvider)
+// console.log("Pollo: ",apolloProvider)
 
 new Vue({
   router,

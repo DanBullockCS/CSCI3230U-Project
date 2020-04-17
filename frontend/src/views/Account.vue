@@ -145,9 +145,9 @@ export default {
       if (!this.password || this.password != this.$store.state.password) {
         this.errPassword.push("Old Password required.");
       }
-      if (this.newPassword.length < 8) {
+      if (this.newPassword.length < 4) {
         this.errPassword.push(
-          "New Password needs at least 8 characters currently only have " +
+          "New Password needs at least 4 characters currently only have " +
             this.newPassword.length +
             " Characters"
         );

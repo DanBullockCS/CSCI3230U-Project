@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import axois from "axios";
+
 export default {
   name: "Login",
   data() {
@@ -42,9 +44,11 @@ export default {
   },
   methods: {
     checkForm: function(e) {
-      if (this.username && this.password && this.password.length >= 8) {
+      if (this.username && this.password && this.password.length >= 4) {
         this.$store.state.username = this.username;
         this.$store.state.password = this.password;
+        this.$store.state.loggedIn = true;
+        this.$store.state.drawerHidden = false;
         this.$router.push("/");
         return true;
       }
@@ -57,13 +61,30 @@ export default {
       if (!this.password) {
         this.err.push("Password required.");
       }
-      if (this.password.length < 8) {
+      if (this.password.length < 4) {
         this.err.push(
-          "Password needs at least 8 characters currently only have " +
+          "Password needs at least 4 characters currently only have " +
             this.password.length +
             " Characters"
         );
       }
+
+      // axios
+      //   .post("/login", {
+      //     username: this.username,
+      //     password: this.password
+      //   })
+      //   .then(function(response) {
+      //     console.log("login resp", response);
+      //     this.$store.state.loggedIn = true;
+      //     this.$store.state.drawerHidden = false;
+      //     response.preventDefault();
+      //   })
+      //   .catch(function(error) {
+      //     console.log(error);
+      //     response.preventDefault();
+      //   });
+
       e.preventDefault();
     }
   }

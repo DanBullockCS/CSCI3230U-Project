@@ -15,7 +15,7 @@
 
     <v-expansion-panel-content>
       <!-- <v-btn text class="mr-5" outlined v-on:click="onDelete(index)"> -->
-      <v-btn text class="mr-5" outlined v-on:click="onDelete(index)">
+      <v-btn text class="mr-5" outlined v-on:click="onDelete(this)">
         <v-icon left>mdi-trash-can</v-icon>Dismiss
       </v-btn>
     </v-expansion-panel-content>
@@ -45,6 +45,21 @@ export default {
     convertTime: function(e) {
       let msConvert = (e / (1000 * 60 * 60)) % 24;
       return Math.floor(msConvert);
+    },
+    onDelete: function(e) {
+      console.log(this);
+      // this.remove();
+        // destroy the vue listeners, etc
+      this.$destroy();
+
+      // remove the element from the DOM
+      this.$el.parentNode.removeChild(this.$el);
+
+      // var index = this.$store.notifications.indexOf(this);
+      // if (index !== -1) this.$store.notifications.splice(index, 1);
+      // let temp = this.Notifications[e];
+      // this.$store.state.deleted.push(temp);
+      // this.Notifications.splice(e, 1);
     }
   }
 };

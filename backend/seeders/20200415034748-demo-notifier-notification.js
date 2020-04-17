@@ -36,14 +36,33 @@ module.exports = {
       data: {title: "Title 2", body: "Body 2"}
     });
 
+    group = await db.NotifierGroup.create({
+      displayName: "Sub Group 1",
+      parentID: 1,
+      ownerID: 1,
+      Notifiers: [ {
+        token: '124',
+      } ]
+    },
+    {
+      include: [ 
+        {
+          model: db.Notifier,
+          include: [db.Event]
+        }
+        ]
+    });
+
+
+
     await Handler.TriggerEvent('NotifierReceived', {
       notifier: group.Notifiers[0],
-      data: {title: "Title 3", body: "Body 3"}
+      data: {title: "Sub 1", body: "You have said hello!"}
     });
 
     await Handler.TriggerEvent('NotifierReceived', {
       notifier: group.Notifiers[0],
-      data: {title: "Title 4", body: "Body 4"}
+      data: {title: "Sub 2", body: "Body 4"}
     });
 
     // return db.sequelize.sync();

@@ -19,6 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     NotifierGroup.Notifiers = NotifierGroup.hasMany( models.Notifier, {foreignKey: 'notifierGroupID' } )
     NotifierGroup.Owner = NotifierGroup.belongsTo( models.UserGroup, {foreignKey: 'ownerID' } )
     NotifierGroup.hasMany( models.NotifierGroup, {foreignKey: 'parentID' } )
+
+    NotifierGroup.hasMany( models.Notification, {foreignKey: "groupID" })
   };
   return NotifierGroup;
 };

@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer disable-resize-watcher app ref="drawer" :width="navigation.width">
+  <v-navigation-drawer app ref="drawer" :width="navigation.width">
     <v-list dense rounded>
       <v-list-item link to="/">
         <v-list-item-action>
@@ -12,7 +12,7 @@
 
       <v-divider />
 
-      <NotifierGroupTree class="my-3" />
+      <NotifierGroupTree class="mt-3 mb-5" />
 
       <v-divider />
 
@@ -126,6 +126,10 @@ export default {
         : "left";
 
       function resize(e) {
+        console.log("RESIZE : ", this.$store.state.drawerHidden);
+        if (this.$store.state.drawerHidden) {
+          return;
+        }
         document.body.style.cursor = "ew-resize";
         let f =
           direction === "right"

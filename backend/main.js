@@ -103,8 +103,8 @@ async function initializeApp() {
   app.post(
     "/login",
     passport.authenticate("local", {
-      successRedirect: "/graphql",
-      failureRedirect: "/login"
+      // successRedirect: "/",
+      // failureRedirect: "/login"
     })
   );
 

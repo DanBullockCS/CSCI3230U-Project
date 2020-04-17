@@ -1,19 +1,18 @@
 <template>
   <!-- <h1>HI</h1> -->
-  <v-treeview dense open-on-click v-model="notifiers" :items="BaseNotifierGroups">
-    <!-- <template slot="label" -->
-  </v-treeview>
-  <!-- <v-list-group prepend-icon="mdi-folder" value="true">
-    <template v-slot:activator>
-      <v-list-item-title>Groups</v-list-item-title>
+  <v-treeview dense open-on-click v-model="notifiers" :items="this.$store.state.notificationGroups">
+    <template slot="label" slot-scope="{ item }">
+      <div @click="changeNotifications(item)">
+        <!-- <v-checkbox v-if="conditionalLogic" :value="getValue(item.id)" :label="item.name"></v-checkbox> -->
+        <div>{{ item.name }}</div>
+      </div>
     </template>
-
-    <v-treeview rounded hoverable activatable :items="NotifierGroups" item-key="displayName"></v-treeview>
-  </v-list-group>-->
+  </v-treeview>
 </template>
 
 <script>
 import gql from "graphql-tag";
+import { mapActions } from "vuex";
 
 export default {
   name: "NotifierGroupTree",
@@ -21,6 +20,10 @@ export default {
   props: {
     // name: String
     notifiers: Array
+  },
+  beforeCreate() {
+    console.log("displaye");
+    this.$store.dispatch("getNotifierGroups");
   },
   apollo: {
     BaseNotifierGroups: gql`
@@ -37,12 +40,18 @@ export default {
       }
     `
   },
+  methods: {
+    ...mapActions(["getNotifierGroups"]),
+    changeNotifications(item) {
+      // console.log("change notif: ", item);
+      console.log("change notif: ", this.$store.state);
+    }
+  },
   data() {
     return {
       arbitraryList: ["1", "2", "3", "4"]
     };
-  },
-  methods: {}
+  }
 };
 </script>
 

@@ -8,7 +8,7 @@ module.exports = {
     let user = await db.User.create({
       name: "admin",
       password: bcrypt.hashSync('admin',10),
-      Profile: { displayName: "First User" },
+      Profile: { displayName: "Admin" },
       UserGroups: [ {displayName: "Test User Group 1"} ]
     }, {
       include: [

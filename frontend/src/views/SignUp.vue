@@ -66,9 +66,9 @@ export default {
       if (!this.password) {
         this.err.push("Password required.");
       }
-      if (this.password.length < 8) {
+      if (this.password.length < 4) {
         this.err.push(
-          "Password needs at least 8 characters currently only have " +
+          "Password needs at least 4 characters currently only have " +
             this.password.length +
             " Characters"
         );

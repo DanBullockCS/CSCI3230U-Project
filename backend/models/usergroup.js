@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     UserGroup.NotifierGroups = UserGroup.hasMany( models.NotifierGroup, {foreignKey: 'ownerID' })
     // UserGroup.belongsToMany( models.User, { through: models.jnc_UserGroups } )
 
-    UserGroup.hasMany( models.Notification, { foreignKey: 'groupID' } );
+    // UserGroup.hasMany( models.Notification, { foreignKey: 'groupID' } );
   };
   return UserGroup;
 };
