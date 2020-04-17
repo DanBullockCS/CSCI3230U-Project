@@ -1,5 +1,4 @@
 <template>
-  <!-- <h1>HI</h1> -->
   <v-treeview dense open-on-click v-model="notifiers" :items="this.$store.state.notificationGroups">
     <template slot="label" slot-scope="{ item }">
       <div @click="changeNotifications(item)">
@@ -44,7 +43,8 @@ export default {
     ...mapActions(["getNotifierGroups"]),
     changeNotifications(item) {
       // console.log("change notif: ", item);
-      console.log("change notif: ", this.$store.state);
+      // console.log("change notif: ", this.$store.state);
+      
     }
   },
   data() {

@@ -35,6 +35,15 @@ module.exports = {
       notifier: group.Notifiers[0],
       data: {title: "Title 2", body: "Body 2"}
     });
+    await Handler.TriggerEvent('NotifierReceived', {
+      notifier: group.Notifiers[0],
+      data: {title: "Title 3", body: "Body 4"}
+    });
+
+    await Handler.TriggerEvent('NotifierReceived', {
+      notifier: group.Notifiers[0],
+      data: {title: "Title 4", body: "Body 4"}
+    });
 
     group = await db.NotifierGroup.create({
       displayName: "Sub Group 1",
