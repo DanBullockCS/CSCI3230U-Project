@@ -93,4 +93,3 @@ class NotifierHandler extends Handler {
   }
 }
 Handler.registerEventHandler(NotifierHandler);
-// Handler.registerEventHandler("NotifierReceived", NotifierHandler);

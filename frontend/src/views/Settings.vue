@@ -1,5 +1,7 @@
 <template>
   <div class="notifier">
+    <v-switch v-model="darkmode" label="Dark Mode"></v-switch>
+
     <v-btn v-on:click="modalToggle()">Modal</v-btn>
 
     <v-dialog v-model="isVisible" width="500">
@@ -17,8 +19,9 @@
         </v-card-actions>
 
         <v-card-actions>
-          <v-btn color="success" type="submit" value="Save">Save</v-btn>
           <v-btn v-on:click="modalToggle()">Exit</v-btn>
+          <v-spacer></v-spacer>
+          <v-btn color="success" type="submit" value="Save" float-right>Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -37,6 +40,22 @@ export default {
   methods: {
     modalToggle: function() {
       this.isVisible = !this.isVisible;
+    }
+  },
+  // Dark mode Theme
+  computed: {
+    darkmode: {
+      get() {
+        return this.$store.getters.isDark;
+      },
+      set() {
+        this.$store.commit("toggleDarkMode");
+        if (this.$store.getters.isDark) {
+          this.$vuetify.theme.dark = true;
+        } else {
+          this.$vuetify.theme.dark = false;
+        }
+      }
     }
   }
 };
