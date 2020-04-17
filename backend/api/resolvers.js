@@ -7,6 +7,10 @@ function loadColumn(colName, convert = x => x) {
 }
 
 export default {
+  Mutation: {
+    test: (parent, args, { db }, info) => db.User.findAll(),
+  },
+
   Query: {
     // User: (parent, { id }, { db }, info) => db.User.findByPk(id),
     User(parent, { id }, { db }, info) {
@@ -19,7 +23,16 @@ export default {
 
     NotifierGroup: (parent, { id }, { db }, info) =>
       db.NotifierGroup.findByPk(id),
-    NotifierGroups: (parent, args, { db }, info) => db.NotifierGroup.findAll(),
+    NotifierGroups: async (parent, args, { db, user }, info) => {
+      let user_groups = await user.getUserGroups()
+      let notifier_groups = []
+
+      for (const user_group of user_groups) {
+        let notifier_group = await user_group.getNotifierGroups()
+        notifier_groups.push( ...notifier_group )
+      }
+      return notifier_groups
+    },
     // NotifierGroupTree: (parent, args, { db }, info) => db.NotifierGroup.findAll({ include: [{ model: db.NotifierGroup, nested: true }]}),
     NotifierGroupTree: (parent, args, { db }, info) => db.NotifierGroup.findAll(),
 

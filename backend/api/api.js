@@ -1,4 +1,4 @@
-import { ApolloServer, gql } from "apollo-server-express";
+import { ApolloServer, gql, AuthenticationError } from "apollo-server-express";
 import faker from "faker";
 import times from "lodash.times";
 import random from "lodash.random";
@@ -22,7 +22,22 @@ export default async function initializeAPI(app, config, logger) {
   const graphqlServer = new ApolloServer({
     typeDefs: gql(typeDefs),
     resolvers,
-    context: { db }
+    // context: { db }
+    context: async ({ req }) => {
+      // get the user token from the headers
+      const token = req.headers.authorization || '';
+     
+      // try to retrieve a user with the token
+      // const user = getUser(token);
+      const user = await db.User.findByPk(1);
+     
+      // optionally block the user
+      // we could also check user roles/permissions here
+      // if (!req.user) throw new AuthenticationError('you must be logged in'); 
+     
+      // add the user to the context
+      return { db, user };
+     },
   });
 
   // const app = express();
@@ -31,7 +46,7 @@ export default async function initializeAPI(app, config, logger) {
   // const router = express.Router();
 
   // app.use(bodyParser);
-  app.use(express.json());
+  // app.use(express.json());
   
   app.post( '/notify/:token?', checkSchema({
     token: {

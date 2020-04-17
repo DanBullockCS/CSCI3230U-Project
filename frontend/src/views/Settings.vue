@@ -25,17 +25,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <!-- <v-form class="modal" action="/" method="post">
-      <v-col cols="2" sm="6">
-        <div class="mx-5">
-          <v-text-field v-model="token" label="Token" outlined shaped clearable></v-text-field>
-          <v-textarea label="Custom Handler" outlined shaped clearable></v-textarea>
-          <v-textarea label="Extra Data" outlined shaped clearable></v-textarea>
-        </div>
-
-        <v-btn color="danger" type="submit" value="Cancel">Cancel</v-btn>
-      </v-col>
-    </v-form>-->
   </div>
 </template>
 
@@ -49,10 +38,6 @@ export default {
     };
   },
   methods: {
-    close: function() {
-      this.$emit("close");
-    },
-
     modalToggle: function() {
       this.isVisible = !this.isVisible;
     }
