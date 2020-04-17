@@ -7,7 +7,6 @@ import Trash from "../views/Trash.vue";
 import Analytics from "../views/Analytics.vue";
 import Login from "../views/Login.vue";
 import SignUp from "../views/SignUp.vue";
-import CreateNotifier from "../views/CreateNotifier.vue";
 import store from '../store';
 
 
@@ -28,8 +27,7 @@ const routes = [
   {
     path: "/Settings",
     name: "Settings",
-    // component: Settings,
-    component: () => import(/* webpackChunkName: "about" */ "../views/Settings.vue")
+    component: Settings,
   },
   {
     path: "/Trash",

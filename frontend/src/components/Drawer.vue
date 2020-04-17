@@ -1,8 +1,8 @@
 <template>
   <v-navigation-drawer
+    disable-resize-watcher
     app
     ref="drawer"
-    disable-resize-watcher
     v-show="checkUser2"
     :width="navigation.width"
   >
@@ -15,7 +15,9 @@
           <v-list-item-title>My Notifications</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-divider></v-divider>
+
+      <v-divider />
+
       <v-list-item link to="/Account">
         <v-list-item-action>
           <v-icon>mdi-account</v-icon>
@@ -49,6 +51,16 @@
         </v-list-item-content>
       </v-list-item>
 
+      <v-divider />
+
+      <v-list-group prepend-icon="mdi-folder" value="true">
+        <template v-slot:activator>
+          <v-list-item-title>Groups</v-list-item-title>
+        </template>
+
+        <v-treeview rounded hoverable activatable :items="NotifierGroups" item-key="displayName"></v-treeview>
+      </v-list-group>
+
       <div class="pa-2">
         <v-btn class="mb-2 primary" to="Login" block v-show="checkUser">Login</v-btn>
         <v-btn class="mb-2 primary" to="SignUp" block v-show="checkUser">Sign Up</v-btn>
@@ -59,6 +71,8 @@
 </template>
 
 <script>
+import gql from "graphql-tag";
+
 export default {
   data: () => {
     return {
@@ -67,6 +81,15 @@ export default {
         borderSize: 5
       }
     };
+  },
+  apollo: {
+    NotifierGroups: gql`
+      query {
+        NotifierGroups {
+          displayName
+        }
+      }
+    `
   },
   computed: {
     checkUser() {
