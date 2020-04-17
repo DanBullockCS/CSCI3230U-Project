@@ -1,13 +1,7 @@
 <template>
-  <v-navigation-drawer
-    disable-resize-watcher
-    app
-    ref="drawer"
-    v-show="checkUser2"
-    :width="navigation.width"
-  >
+  <v-navigation-drawer disable-resize-watcher app ref="drawer" :width="navigation.width">
     <v-list dense rounded>
-      <v-list-item link to="/Home">
+      <v-list-item link to="/">
         <v-list-item-action>
           <v-icon>mdi-home</v-icon>
         </v-list-item-action>
@@ -110,7 +104,7 @@ export default {
   methods: {
     logoutBtn() {
       this.$store.state.username = "";
-      this.$router.push("/Login");
+      this.$router.push("/");
     },
     // Drawer Resize code
     setBorderWidth() {

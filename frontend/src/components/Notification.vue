@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "Dropdown",
+  name: "Notification",
   data() {
     return {
       arbitraryList: ["1", "2", "3", "4"]

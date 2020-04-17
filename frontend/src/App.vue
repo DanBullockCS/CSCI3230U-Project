@@ -2,8 +2,8 @@
   <div id="app">
     <v-app id="notifier">
       <v-content>
-        <NotificationComponent />
         <Drawer />
+
         <v-container fluid>
           <!-- The content being routed -->
           <router-view />
@@ -15,11 +15,10 @@
 
 <script>
 import Drawer from "@/components/Drawer.vue";
-import NotificationComponent from "@/components/NotificationComponent.vue";
 
 export default {
   name: "app",
-  components: { Drawer, NotificationComponent },
+  components: { Drawer },
   props: {
     source: String
   }
