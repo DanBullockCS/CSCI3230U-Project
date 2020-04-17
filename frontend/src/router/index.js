@@ -8,14 +8,17 @@ import Analytics from "../views/Analytics.vue";
 import Login from "../views/Login.vue";
 import SignUp from "../views/SignUp.vue";
 import CreateNotifier from "../views/CreateNotifier.vue";
+import store from '../store';
+
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
+    beforeEnter: redirect,
     name: "Home",
-    component: Home
+    component: Home,
   },
   {
     path: "/Account",
@@ -47,8 +50,10 @@ const routes = [
     path: "/SignUp",
     name: "SignUp",
     component: SignUp
-  }
+  },
+  { path: '*', redirect: '/' }
 ];
+
 
 const router = new VueRouter({
   mode: "history",
@@ -56,4 +61,18 @@ const router = new VueRouter({
   routes,
 });
 
+
+
+function redirect(to, from, next) {
+  if (store.state.username) {
+    // or however you store your logged in state
+    next(); // allow to enter route
+  } else {
+    next('/Login'); // go to '/login';
+  }
+}
+
 export default router;
+
+
+

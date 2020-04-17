@@ -30,34 +30,5 @@
 <script>
 import gql from "graphql-tag";
 
-export default {
-  name: "Home",
-  apollo: {
-    Notifications: gql`
-      query {
-        Notifications {
-          title
-          body
-          createdAt
-          deliveredAt
-        }
-      }
-    `
-  },
-  data() {
-    return {};
-  },
-  methods: {
-    onDelete: function(e) {
-      let temp = this.Notifications[e];
-      this.$store.state.deleted.push(temp);
-      this.Notifications.splice(e, 1);
-      console.log(this.Notifications);
-    },
-    convertTime: function(e) {
-      let msConvert = (e / (1000 * 60 * 60)) % 24;
-      return Math.floor(msConvert);
-    }
-  }
-};
+export default {};
 </script>

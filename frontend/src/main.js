@@ -7,7 +7,7 @@ import apolloProvider from "./plugins/apollo";
 
 Vue.config.productionTip = false;
 
-console.log("Pollo: ",apolloProvider)
+console.log("Pollo: ", apolloProvider)
 
 new Vue({
   router,
@@ -15,4 +15,6 @@ new Vue({
   vuetify,
   apolloProvider,
   render: h => h(App)
-}).$mount("#app");
+}).$mount("#app")
+
+
