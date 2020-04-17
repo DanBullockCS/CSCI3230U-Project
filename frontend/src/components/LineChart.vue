@@ -1,4 +1,5 @@
 <template>
+  <!-- If we had budgeted time a little better, a linechart would be implemented, here is some code with randomly generated data-->
   <div id="line-container" class="svg-container" align="center">
     <h1>{{ title }}</h1>
     <svg id="line-svg" v-if="redrawToggle === true" :width="svgWidth" :height="svgHeight" />
@@ -11,11 +12,10 @@ import * as d3 from "d3";
 
 // Pixels of elements
 let drawerWidth = 256;
-let appBarandFooter = 100;
 
 var margin = { top: 50, right: 50, bottom: 50, left: 50 },
   width = window.innerWidth - drawerWidth - margin.left - margin.right, // Use the window's width
-  height = window.innerHeight - appBarandFooter - margin.top - margin.bottom; // Use the window's height
+  height = window.innerHeight - margin.top - margin.bottom; // Use the window's height
 
 export default {
   name: "LineChart",

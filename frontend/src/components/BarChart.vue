@@ -21,13 +21,12 @@
 <script>
 import * as d3 from "d3";
 
-// Pixels of elements
+// Pixels of drawer
 let drawerWidth = 256;
-let appBarandFooter = 100;
 
 var margin = { top: 50, right: 50, bottom: 50, left: 50 },
-  width = window.innerWidth - drawerWidth - margin.left - margin.right, // Use the window's width
-  height = window.innerHeight - appBarandFooter - margin.top - margin.bottom; // Use the window's height
+  width = window.innerWidth - drawerWidth - margin.left - margin.right,
+  height = window.innerHeight / 2 - margin.top - margin.bottom;
 
 export default {
   name: "BarChart",
@@ -44,6 +43,7 @@ export default {
     this.AnimateLoad();
   },
 
+  // A little confusing because d3 and Vue both use "data" as a keyword.
   data: () => ({
     svgWidth: 0,
     redrawToggle: true
@@ -71,16 +71,35 @@ export default {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+      // X-axis
       svg
         .append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + this.svgHeight + ")")
-        .call(d3.axisBottom(this.xScale));
-
+        .call(d3.axisBottom(this.xScale)).text;
+      // Y-axis
       svg
         .append("g")
         .attr("class", "y axis")
         .call(d3.axisLeft(this.yScale));
+
+      // Labels
+      svg
+        .append("text")
+        .attr(
+          "transform",
+          "translate(" + width / 2 + " ," + (height + margin.top) + ")"
+        )
+        .style("text-anchor", "middle")
+        .text("Notification Titles");
+      svg
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x", 0 - height / 2)
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Notification IDs");
     },
     AddResizeListener() {
       // Redraw chart after the window has been resized
@@ -99,12 +118,12 @@ export default {
     // dataMax and dataMin used to calculate domain for yScale
     dataMax() {
       return d3.max(this.data, d => {
-        return d[this.yKey];
+        return parseInt(d[this.yKey]);
       });
     },
     dataMin() {
       return d3.min(this.data, d => {
-        return d[this.yKey];
+        return parseInt(d[this.yKey]);
       });
     },
     xScale() {
