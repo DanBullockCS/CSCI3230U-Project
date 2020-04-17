@@ -3,6 +3,10 @@
 Group project Members: Nathan Beals, Daniel Bullock, Sinthooran Ravinathan & Alexander Waddell
 
 
+## What is it?
+
+Notifier is a notification center, a central hub to display all of your notifications you acculmulate throughout your different applications. It was created using VueJS/Vuetify, and its backend is run with the help of PostgreSQL and GraphQL.
+
 ## Project setup
 
 The project is broken into to mostly separate components: **frontend** and **backend**.
