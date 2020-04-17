@@ -1,7 +1,5 @@
 <template>
   <div class="notifier">
-    <v-btn v-on:click="modalToggle()">Add Notifier</v-btn>
-
     <v-dialog v-model="isVisible" width="500">
       <v-card>
         <v-card-title class="headline grey">Create Notifier</v-card-title>
