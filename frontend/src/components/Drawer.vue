@@ -12,6 +12,10 @@
 
       <v-divider />
 
+      <NotifierGroupTree class="my-3" />
+
+      <v-divider />
+
       <v-list-item link to="/Account">
         <v-list-item-action>
           <v-icon>mdi-account</v-icon>
@@ -47,14 +51,6 @@
 
       <v-divider />
 
-      <v-list-group prepend-icon="mdi-folder" value="true">
-        <template v-slot:activator>
-          <v-list-item-title>Groups</v-list-item-title>
-        </template>
-
-        <v-treeview rounded hoverable activatable :items="NotifierGroups" item-key="displayName"></v-treeview>
-      </v-list-group>
-
       <div class="pa-2">
         <v-btn class="mb-2 primary" to="Login" block v-show="checkUser">Login</v-btn>
         <v-btn class="mb-2 primary" to="SignUp" block v-show="checkUser">Sign Up</v-btn>
@@ -66,8 +62,13 @@
 
 <script>
 import gql from "graphql-tag";
+import NotifierGroupTree from "@/components/NotifierGroupTree.vue";
 
 export default {
+  name: "Drawer",
+  components: {
+    NotifierGroupTree
+  },
   data: () => {
     return {
       navigation: {

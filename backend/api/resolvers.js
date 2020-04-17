@@ -23,12 +23,18 @@ export default {
 
     NotifierGroup: (parent, { id }, { db }, info) =>
       db.NotifierGroup.findByPk(id),
-    NotifierGroups: async (parent, args, { db, user }, info) => {
+
+    // NotifierGroups: async (parent, args, { db, user }, info) => {
+    BaseNotifierGroups: async (parent, args, { db, user }, info) => {
       let user_groups = await user.getUserGroups()
       let notifier_groups = []
 
       for (const user_group of user_groups) {
-        let notifier_group = await user_group.getNotifierGroups()
+        let notifier_group = await user_group.getNotifierGroups({
+          where: {
+            parentID: null
+          }
+        })
         notifier_groups.push( ...notifier_group )
       }
       return notifier_groups

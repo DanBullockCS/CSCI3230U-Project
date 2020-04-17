@@ -24,8 +24,9 @@ type Query {
   Notifiers(id: ID): [Notifier]!
 
   NotifierGroup(id: ID!): NotifierGroup
-  NotifierGroups: [NotifierGroup]!
-  NotifierGroupTree: [NotifierGroup]!
+  NotifierGroups: [NotifierGroup]
+  BaseNotifierGroups: [NotifierGroup]
+  NotifierGroupTree: [NotifierGroup]
 
 
   Notification(id: ID!): Notification

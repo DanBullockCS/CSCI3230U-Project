@@ -2,26 +2,35 @@
   <div class="home">
     <h3>Welcome {{this.$store.state.username}}</h3>
     <v-row class>
-      <v-col cols="2" sm="6">
-        <v-expansion-panels accordion focusable>
-          <v-expansion-panel v-for="(i, index) in Notifications" :key="i.title">
-            <div>
-              <v-expansion-panel-header>
-                <h4 class="text-left">{{i.title}}</h4>
-                <label class="text-right">Recieved {{convertTime(i.deliveredAt)}} hours ago</label>
-              </v-expansion-panel-header>
-            </div>
-
-            <v-expansion-panel-content class="pt-2">Message: {{i.body}}</v-expansion-panel-content>
-            <v-expansion-panel-content>Created {{convertTime(i.createdAt)}} hours ago</v-expansion-panel-content>
-
-            <v-expansion-panel-content>
-              <v-btn text class="mr-5" outlined v-on:click="onDelete(index)">
-                <v-icon left>mdi-trash-can</v-icon>Delete
-              </v-btn>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
+      <v-col cols="8">
+        <v-expansion-panels accordion hover multiple>
+          <Notification
+            v-for="(i, index) in Notifications"
+            :key="i.title"
+            :title="i.title"
+            :body="i.body"
+            :deliveredAt="i.deliveredAt"
+            :index="index"
+          />
         </v-expansion-panels>
+      </v-col>
+      <v-col cols="4">
+        <v-card class="mx-auto" max-width="344" outlined>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <div class="overline mb-4">Filter Options</div>
+              <v-list-item-title class="headline mb-1">Headline 5</v-list-item-title>
+              <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
+            </v-list-item-content>
+
+            <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
+          </v-list-item>
+
+          <v-card-actions>
+            <v-btn text>Button</v-btn>
+            <v-btn text>Button</v-btn>
+          </v-card-actions>
+        </v-card>
       </v-col>
     </v-row>
   </div>
@@ -29,9 +38,11 @@
 
 <script>
 import gql from "graphql-tag";
+import Notification from "@/components/Notification.vue";
 
 export default {
   name: "Home",
+  components: { Notification },
   apollo: {
     Notifications: gql`
       query {
@@ -53,11 +64,10 @@ export default {
       this.$store.state.deleted.push(temp);
       this.Notifications.splice(e, 1);
       console.log(this.Notifications);
-    },
-    convertTime: function(e) {
-      let msConvert = (e / (1000 * 60 * 60)) % 24;
-      return Math.floor(msConvert);
     }
   }
 };
 </script>
+
+<style>
+</style>
