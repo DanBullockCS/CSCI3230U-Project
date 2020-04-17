@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <h3>Sign In</h3>
-
+    <!-- A Login Form created using veutify and asks for specific requirements to login -->
     <v-form class="mt-5" @submit="checkForm" action="/" method="post">
       <div class="my-5">
         <v-col cols="2" sm="6">
@@ -15,6 +15,7 @@
       </div>
     </v-form>
 
+    <!-- These alerts show up only when specific error statements are passed back to the user for not properly doing login Process -->
     <v-alert type="error" v-if="err.length">
       <b>Please correct the following error(s):</b>
       <ul>
@@ -22,6 +23,7 @@
       </ul>
     </v-alert>
 
+    <!-- This button redirects you to the SignUp route using vue-router -->
     <h3 class="mt-12">Haven't made an Account yet?</h3>
     <div class="mx-5">
       <br />
@@ -34,6 +36,8 @@
 export default {
   name: "Login",
   data() {
+    // These are the only data values being used here
+    // err holds an array of error messages that is displayed when the used fails to meet conditions on the SignUp form
     return {
       err: [],
       username: "",
@@ -41,6 +45,7 @@ export default {
     };
   },
   methods: {
+    // This checks the various conditions that the user has to follow and will proceed to the main page when the conditions all pass
     checkForm: function(e) {
       if (this.username && this.password && this.password.length >= 8) {
         this.$store.state.username = this.username;
@@ -49,6 +54,7 @@ export default {
         return true;
       }
 
+      //If the failing conditions below end up as true, then the err array will have messages pushed into it and will be displayed in the error alert when clicking the submit button
       this.err = [];
 
       if (!this.username) {

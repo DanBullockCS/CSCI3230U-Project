@@ -1,6 +1,7 @@
 <template>
   <div class="account">
     <h3>Account Preferences</h3>
+    <!-- Change Username request form using Veutify-->
     <h3 class="mt-5">Change Username:</h3>
     <h4>Current Username: {{this.$store.state.username}}</h4>
     <v-form class="mt-5" @submit="checkFormUser" action="/" method="post">
@@ -14,6 +15,7 @@
     </v-form>
     <br />
 
+    <!-- Error alerts for failing Username Change conditions -->
     <v-alert type="error" v-if="errUser.length">
       <b>Please correct the following error(s):</b>
       <ul>
@@ -21,6 +23,7 @@
       </ul>
     </v-alert>
 
+    <!-- Change Password request form using Veutify-->
     <h3 class="mt-12">Change Password:</h3>
     <!-- <h4>Current Email: {{this.$store.state.password}}</h4> -->
     <v-form class="mt-5" @submit="checkFormPassword" action="/" method="post">
@@ -56,6 +59,7 @@
     </v-form>
     <br />
 
+    <!-- Error alerts for failing Password Change conditions -->
     <v-alert type="error" v-if="errPassword.length">
       <b>Please correct the following error(s):</b>
       <ul>
@@ -63,6 +67,7 @@
       </ul>
     </v-alert>
 
+    <!-- Change Email request form using Veutify-->
     <h3 class="mt-12">Change Email Address</h3>
     <h4>Current Email: {{this.$store.state.email}}</h4>
     <v-form class="mt-5" @submit="checkFormEmail" action="/" method="post">
@@ -75,6 +80,7 @@
       </v-col>
     </v-form>
     <br />
+    <!-- Error alerts for failing Email Change conditions -->
     <v-alert type="error" v-if="errEmail.length">
       <b>Please correct the following error(s):</b>
       <ul>
@@ -88,6 +94,10 @@
 export default {
   name: "Account",
   data() {
+    // These are the only data values being used here
+    // errUser holds an array of error messages that is displayed when the used fails to meet conditions on the Username Change form
+    // errUser holds an array of error messages that is displayed when the used fails to meet conditions on the Password Change form
+    // errUser holds an array of error messages that is displayed when the used fails to meet conditions on the Email Change form
     return {
       errUser: [],
       username: "",
@@ -102,6 +112,7 @@ export default {
     };
   },
   methods: {
+    // This checks the various conditions that the user has to follow and will update the Username when the conditions all pass for the User Changes
     checkFormUser: function(e) {
       if (
         this.username &&
@@ -113,7 +124,7 @@ export default {
 
         return true;
       }
-
+      //If the failing conditions below end up as true, then the errUser array will have messages pushed into it and will be displayed in the error alert when clicking the Change button
       this.errUser = [];
 
       if (!this.username || this.username != this.$store.state.username) {
@@ -125,7 +136,7 @@ export default {
       e.preventDefault();
     },
 
-    //P
+    // This checks the various conditions that the user has to follow and will update the Password when the conditions all pass for the Password Changes
     checkFormPassword: function(e) {
       if (
         this.password &&
@@ -139,7 +150,7 @@ export default {
         this.$router.push("/");
         return true;
       }
-
+      //If the failing conditions below end up as true, then the errPassword array will have messages pushed into it and will be displayed in the error alert when clicking the Change button
       this.errPassword = [];
 
       if (!this.password || this.password != this.$store.state.password) {
@@ -164,7 +175,7 @@ export default {
       e.preventDefault();
     },
 
-    //Email
+    // This checks the various conditions that the user has to follow and will update the Email when the conditions all pass for the Email Changes
     checkFormEmail: function(e) {
       if (
         this.email &&
@@ -175,7 +186,8 @@ export default {
         this.$router.push("/");
         return true;
       }
-
+      //If the failing conditions below end up as true, then the errEmail array will have messages pushed into it and will be displayed in the error alert when clicking the Change button
+      this.errPassword = [];
       this.errEmail = [];
 
       if (!this.email || this.email != this.$store.state.email) {

@@ -1,6 +1,7 @@
 <template>
   <div class="signup">
     <h3>Register Below</h3>
+    <!-- A Sign Up Form created using veutify and asks for specific requirements to make an account -->
     <v-form class="mt-5" @submit="checkForm" action="/" method="post">
       <v-col cols="2" sm="6">
         <v-text-field v-model="username" label="Username" type="text" outlined shaped clearable></v-text-field>
@@ -15,11 +16,13 @@
           clearable
         ></v-text-field>
 
+        <!-- This button only works when all of the form data is properly inputted in the right text fields -->
         <v-btn color="success" type="submit" value="Submit">Submit</v-btn>
       </v-col>
     </v-form>
     <br />
 
+    <!-- These alerts show up only when specific error statements are passed back to the user for not properly doing SignUp Process -->
     <v-alert type="error" v-if="err.length">
       <b>Please correct the following error(s):</b>
       <ul>
@@ -33,6 +36,8 @@
 export default {
   name: "SignUp",
   data() {
+    // These are the only data values being used here
+    // err holds an array of error messages that is displayed when the used fails to meet conditions on the SignUp form
     return {
       err: [],
       username: "",
@@ -42,6 +47,7 @@ export default {
     };
   },
   methods: {
+    // This checks the various conditions that the user has to follow and will proceed to the main page when the conditions all pass
     checkForm: function(e) {
       if (
         this.username &&
@@ -58,6 +64,7 @@ export default {
         return true;
       }
 
+      //If the failing conditions below end up as true, then the err array will have messages pushed into it and will be displayed in the error alert when clicking the submit button
       this.err = [];
 
       if (!this.username) {
